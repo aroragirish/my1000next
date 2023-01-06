@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/Link";
+import axios from 'axios';
 import { useRouter } from "next/router";
 import {
   Collapse,
@@ -11,13 +12,30 @@ import {
   NavItem,
   Container,
   NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  ButtonGroup
 } from "reactstrap";
 import logo from "../../assets/images/logos/white-text.png";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const {user, tokens} = useSelector(state => state.user);
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
+  const logout = () => {
+    axios.post('http://localhost:3001/v1/auth/logout', {refreshToken: tokens.token}).then((res) => {
+      dispatch({
+        type: 'LOGOUT'
+      });
+      router.push('/');
+    })
+  }
   return (
     <div className="topbar fixed-top bg-dark" id="top">
       <div className="header6">
@@ -88,32 +106,32 @@ const Header = () => {
                     </a>
                   </Link>
                 </NavItem>
-                <NavItem className="font-weight-bold">
-                  <Link href="/blog">
-                    <a
-                      className={
-                        router.pathname == "/blog"
-                          ? "text-success nav-link"
-                          : "nav-link"
-                      }
-                    >
-                      Blog
-                    </a>
-                  </Link>
-                </NavItem>
               </Nav>
-              <div className="act-buttons font-weight-bold">
+              {user ? <ButtonGroup>
+              <UncontrolledDropdown setActiveFromChild>
+                <DropdownToggle tag="button" className="btn btn-success text-dark font-weight-bold" caret>
+                  {user.name}
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem tag="a" onClick={logout}>
+                    Logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </ButtonGroup> : <div className="act-buttons font-weight-bold">
                 <Link
                   href="/get-started"
                   passHref
                   >
                 <NavLink
-                  className="btn btn-info font-weight-bold"
+                  className="btn btn-success text-dark font-weight-bold"
                 >
                   Login/Register
                 </NavLink>
                 </Link>
-              </div>
+              </div>}
+              
+
             </Collapse>
           </Navbar>
         </Container>

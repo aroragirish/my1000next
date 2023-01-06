@@ -39,7 +39,7 @@ const PageForm = () => {
                                 <Label htmlFor="checkbox1"> Remember me </Label>
                             </FormGroup>
                             <Col md="12">
-                                <Button type="submit" className="btn btn-success waves-effect waves-light m-r-10">Submit</Button>
+                                <Button type="submit" className="btn btn-success text-dark waves-effect waves-light m-r-10">Submit</Button>
                                 <Button type="submit" className="btn btn-inverse waves-effect waves-light">Cancel</Button>
                             </Col>
                         </Form>

@@ -113,8 +113,8 @@ const PortfolioComponent = () => {
                 </CardBody>
               </Card>
             </Col>
-            <div class="text-center mt-5 w-100">
-              <a href="product"><button class="btn btn-outline-dark text-muted">Load More</button></a>
+            <div className="text-center mt-5 w-100">
+              <a href="product"><button className="btn btn-outline-dark text-muted">Load More</button></a>
             </div>
           </Row>
         </Container>

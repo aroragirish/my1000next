@@ -2,6 +2,8 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Image from "next/image";
+import Link from "next/Link";
+
 import herobanner from "../../../assets/images/staticslider/slider/hero-banner.png";
 const BannerComponent = () => {
   return (
@@ -19,13 +21,13 @@ const BannerComponent = () => {
                 congue vel quam nec luctus.In accumsan at eros in dignissim.
                 Cras sodales nisi nonn accumsan.
               </h6>
-              <a
+              <Link
                 className="btn btn-light btn-rounded btn-md m-t-20"
                 data-toggle="collapse"
-                href=""
+                href="/get-started"
               >
-                <span>Start Now</span>
-              </a>
+                <span className="btn btn-success mt-3 text-dark">Start Now</span>
+              </Link>
             </Col>
             <Col md="6" className="text-center">
               <Image width={350} height={500} src={herobanner} alt="herobanner"></Image>

@@ -21,7 +21,6 @@ export default function Home() {
       <PortfolioComponent />
       <BlogComponent />
       <BannerComponent />
-      <CallToAction />
     </div>
   );
 }

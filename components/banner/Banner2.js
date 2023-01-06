@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import Link from "next/Link";
 import { Container, Row, Col } from "reactstrap";
 import Image from "next/image";
 import bannerimg from "../../assets/images/form-banners/banner1/hero-graphics.png";
@@ -16,11 +16,13 @@ const Banner2 = () => {
             <h4 className="subtitle font-light">
             Access vetted investment opportunities in hotels, solar energies, etc.
             </h4>
-            <a
-              className="btn btn-success m-r-20 btn-md m-t-30 font-weight-bold"
-            >
-              Get Started
-            </a>
+            <Link href="/get-started">
+              <a
+                className="btn btn-success text-dark m-r-20 btn-md m-t-30 font-weight-bold"
+              >
+                Get Started
+              </a>
+            </Link>
             <Link href="/#coming">
               <a className="btn btn-md m-t-30 font-weight-bold btn-outline-light ">
                 Buy Business
