@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {Link} from "next";
+import Link from "next/link";
 import { Container, Row, Col, Button } from "reactstrap";
 
 const ErrorPage = () => {

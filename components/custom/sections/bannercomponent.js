@@ -2,7 +2,7 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Image from "next/image";
-import {Link} from "next";
+import Link from "next/link";
 
 import herobanner from "../../../assets/images/staticslider/slider/hero-banner.png";
 const BannerComponent = () => {

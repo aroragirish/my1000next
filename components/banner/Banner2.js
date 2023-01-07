@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "next";
+import Link from "next/link";
 import { Container, Row, Col } from "reactstrap";
 import Image from "next/image";
 import bannerimg from "../../assets/images/form-banners/banner1/hero-graphics.png";
