@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import Link from "next/Link";
+import {Link} from "next";
 
 const Footer = () => {
   return (

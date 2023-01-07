@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/Link";
+import {Link} from "next";
 import axios from 'axios';
 import { useRouter } from "next/router";
 import {
