@@ -52,3 +52,15 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.get-started {
+  color: black;
+    border-radius: 36px 0 0 36px;
+    text-indent: 35px;
+    padding-right: 15px;
+    width: 61%;
+    font-weight: 300;
+    -webkit-box-shadow: -5px 0 30px 0 rgb(0 0 0 / 5%);
+    box-shadow: -5px 0 30px 0 rgb(0 0 0 / 5%);
+    text-overflow: ellipsis;
+}

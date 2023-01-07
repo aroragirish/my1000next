@@ -11,7 +11,7 @@ const Banner2 = () => {
         <Row className="">
           <Col lg="6" md="6" className="align-self-center">
             <h1 className="title">
-            Invest in high returns high returns secured debt assets
+            Invest in high returns secured debt assets
             </h1>
             <h4 className="subtitle font-light">
             Access vetted investment opportunities in hotels, solar energies, etc.

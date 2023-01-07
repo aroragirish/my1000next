@@ -50,33 +50,8 @@ const About = () => {
                         <p className="m-t-15 m-b-0"></p>
                     </Col>
                 </Row>
-                <Row>
-                    <Col lg="4" className="m-b-30">
-
-                        <Image
-                            src={img1}
-                            alt="img"
-                            className="img-responsive img-rounded"
-                        />
-                        <p className="m-t-15 m-b-0"></p>
-                    </Col>
-                    <Col lg="4" className="text-center m-b-30">
-
-                        <Image src={img2} alt="img" className="img-circle" />
-                        <p className="m-t-15 m-b-0"></p>
-                    </Col>
-                    <Col lg="4">
-
-                        <Image
-                            src={img3}
-                            alt="img"
-                            className="img-responsive img-thumbnail"
-                        />
-                        <p className="m-t-15 m-b-0"></p>
-                    </Col>
-                </Row>
             </div>
-            <div className="spacer feature4">
+            <div className="feature4">
                 <Container>
                     <Row className="justify-content-center">
                         <Col md="7" className="text-center">
@@ -186,7 +161,6 @@ const About = () => {
                 </div>
 
             </section>
-            <FormBannerComponent />
         </>
     )
 }

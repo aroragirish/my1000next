@@ -42,7 +42,7 @@ const Header = () => {
         <Container className="po-relative">
           <Navbar className="navbar-expand-lg  h6-nav-bar">
             <NavbarBrand href="/">
-              <Image height={50} width={125} src={logo} alt="wrapkit" />
+              <Image height={70} width={125} src={logo} alt="wrapkit" />
             </NavbarBrand>
             <NavbarToggler onClick={toggle}>
               <span className="ti-menu"></span>
@@ -54,19 +54,21 @@ const Header = () => {
               id="h6-info"
             >
               <Nav navbar className="ml-auto ">
-                <NavItem className="font-weight-bold">
-                  <Link href="/">
+                {
+                  user && <NavItem className="font-weight-bold">
+                  <Link href="/dashboard">
                     <a
                       className={
-                        router.pathname == "/"
+                        router.pathname == "/dashboard"
                           ? "text-success nav-link"
                           : "nav-link"
                       }
                     >
-                      Home
+                      Dashboard
                     </a>
                   </Link>
                 </NavItem>
+                }
                 <NavItem className="font-weight-bold">
                   <Link href="/about">
                     <a
