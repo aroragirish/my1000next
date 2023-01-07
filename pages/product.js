@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/Image";
+import Image from "next/image";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import img1 from "../assets/images/ui/img6.jpg";
 import img2 from "../assets/images/ui/5.jpg";
