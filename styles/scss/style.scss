@@ -1,0 +1,66 @@
+/*
+Template Name: Wrakit UI Kit
+Author: wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+/**
+ * Table Of Content
+ *
+ * 	1. Globals
+ *	2. Headers
+ *	3. Navigations
+ *	4. Banners
+ *	5. Footers
+ *	6. app
+ *	7. Widgets
+ *	8. Custom Templates
+ */
+
+@import "variable";
+@import "~/node_modules/bootstrap/scss/bootstrap";
+@import "../scss/icons/font-awesome/css/font-awesome.min.css";
+@import "../scss/icons/themify-icons/themify-icons.css";
+@import "elements.scss";
+@import "app.scss";
+@import "common.scss";
+@import "responsive.scss";
+
+
+.bg-dark {
+    background-color: #0a2640 !important;
+  }
+
+  .container {
+    max-width: 1200px;
+}
+
+
+.top150 {
+  top: -140px !important ;
+  position: relative !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.get-started {
+  color: black;
+    border-radius: 36px 0 0 36px;
+    text-indent: 35px;
+    padding-right: 15px;
+    width: 61%;
+    font-weight: 300;
+    -webkit-box-shadow: -5px 0 30px 0 rgb(0 0 0 / 5%);
+    box-shadow: -5px 0 30px 0 rgb(0 0 0 / 5%);
+    text-overflow: ellipsis;
+}
