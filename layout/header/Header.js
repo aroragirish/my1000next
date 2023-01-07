@@ -29,7 +29,7 @@ const Header = () => {
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
   const logout = () => {
-    axios.post('http://localhost:3001/v1/auth/logout', {refreshToken: tokens.token}).then((res) => {
+    axios.post('http://ec2-3-110-38-238.ap-south-1.compute.amazonaws.com:5000/v1/auth/logout', {refreshToken: tokens.token}).then((res) => {
       dispatch({
         type: 'LOGOUT'
       });
