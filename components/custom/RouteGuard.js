@@ -14,7 +14,15 @@ function RouteGuard({ children }) {
         console.log(router.asPath);
         authCheck(router.asPath);
         // on route change start - hide page content by setting authorized to false  
-        const hideContent = () => setAuthorized(false);
+        const hideContent = () => {
+            const loader = document.getElementById('spinner');
+            const mainWrapper = document.getElementById('main-wrapper');
+          
+            mainWrapper.classList.add('less-opaque');
+          
+            loader.classList.add('lds-hourglass');
+            setAuthorized(false)
+        };
         router.events.on('routeChangeStart', hideContent);
 
         // on route change complete - run auth check 
@@ -30,6 +38,11 @@ function RouteGuard({ children }) {
     }, [user]);
 
     function authCheck(url) {
+        const loader = document.getElementById('spinner');
+        const mainWrapper = document.getElementById('main-wrapper');
+      
+        mainWrapper.classList.remove('less-opaque');
+        loader.classList.remove('lds-hourglass');
         // redirect to login page if accessing a private page and not logged in 
         const publicPaths = ['/get-started', '/','/basic', '/about', '/product', '/how-it-works', '/register'];
         const path = url.split('?')[0];

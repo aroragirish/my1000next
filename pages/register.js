@@ -14,6 +14,7 @@ import {
     Label
 } from "reactstrap";
 import axios from 'axios';
+import { registerApi } from '../services/authService';
 
 const register = () => {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const register = () => {
             role: rSelected,
             name
         }
-        axios.post('http://ec2-3-110-38-238.ap-south-1.compute.amazonaws.com:5000/v1/auth/register', body).then(async (res) => {
+        registerApi(body).then(async (res) => {
             await saveUser(res);
             router.push('/dashboard');
         });

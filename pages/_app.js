@@ -9,6 +9,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        
+      <div id="spinner" class=""></div>
       <Layout>
         <RouteGuard>
         <Component {...pageProps} />

@@ -20,6 +20,7 @@ import {
 } from "reactstrap";
 import logo from "../../assets/images/logos/white-text.png";
 import { useSelector, useDispatch } from "react-redux";
+import { logoutApi } from "../../services/authService";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Header = () => {
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
   const logout = () => {
-    axios.post('http://ec2-3-110-38-238.ap-south-1.compute.amazonaws.com:5000/v1/auth/logout', {refreshToken: tokens.token}).then((res) => {
+    logoutApi({refreshToken: tokens.refresh.token}).then((res) => {
       dispatch({
         type: 'LOGOUT'
       });

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { sendOtpApi, verifyOtpApi } from "../../../services/authService";
 
 const FormBannerComponent = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const FormBannerComponent = () => {
     const body = {
       email
     }
-    axios.post('http://ec2-3-110-38-238.ap-south-1.compute.amazonaws.com:5000/v1/auth/send-otp', body).then((res) => {
+    sendOtpApi(body).then((res) => {
       console.log(res);
       setShowSuccess(true);
       setShowVerify(true);
@@ -64,7 +65,7 @@ const FormBannerComponent = () => {
       email,
       otp
     }
-    axios.post('http://ec2-3-110-38-238.ap-south-1.compute.amazonaws.com:5000/v1/auth/verify-otp', body).then(async (res) => {
+    verifyOtpApi(body).then(async (res) => {
       if (!res.data.registered) {
         console.log('herree', res);
         await regiterUser(res);
