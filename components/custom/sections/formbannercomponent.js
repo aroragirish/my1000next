@@ -20,6 +20,8 @@ const FormBannerComponent = () => {
   const [showVerify, setShowVerify] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [emailSentFail, setEmailFail] = useState(false);
+  const [otpFailed, setOtpFailed] = useState(false);
+
 
   const [otp, setOtp] = useState();
   const [email, setEmail] = useState('');
@@ -75,9 +77,10 @@ const FormBannerComponent = () => {
         router.push('/dashboard');
       }
     })
-      .catch((err) => {
-        console.log(err);
-      });
+    .catch((err) => {
+      setOtpFailed(true);
+      console.log(err);
+    });
   }
   return (
     <div>
@@ -121,6 +124,11 @@ const FormBannerComponent = () => {
                           emailSentFail && (<Alert toggle={() => setEmailFail(false)} dismissible color="danger">
                             Unable to sent an email!
                           </Alert>)
+                        }
+                        {
+                          otpFailed && (<Alert toggle={() => setOtpFailed(false)} dismissible color="danger">
+                          Unable to verify entered OTP
+                        </Alert>)
                         }
                       </Col>
                     </Row>

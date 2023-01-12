@@ -58,6 +58,11 @@ const baseService = (options) => {
   };
 
   const onError = (error) => {
+    const loader = document.getElementById('spinner');
+    const mainWrapper = document.getElementById('main-wrapper');
+  
+    mainWrapper.classList.remove('less-opaque');
+    loader.classList.remove('lds-hourglass');
     if (error.response.status === 401) {
       store.dispatch({
         type: 'LOGOUT'
