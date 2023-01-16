@@ -24,3 +24,10 @@ export const getAllBusinessesByCategory = (category) => {
         method: "GET"
     });
 };
+
+export const getBusinessById = (id) => {
+    return baseService({
+        url: `/v1/business/${id}`,
+        method: "GET"
+    });
+};
