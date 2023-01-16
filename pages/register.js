@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import CustomComponents from '../components/custom/Custom-components';
 import {
     Row,
     Col,
@@ -26,9 +25,11 @@ const register = () => {
     const [name, setName] = useState('');
 
 
-    const { registerNeeded } = useSelector(state => state.user);
+    const { registerNeeded,user } = useSelector(state => state.user);
     useEffect(() => {
-        if (registerNeeded.registered) {
+        if (user) {
+            router.push('/dashboard');
+        } else if (registerNeeded.registered) {
             router.push('/get-started');
         } else {
             setEmail(registerNeeded.email)
@@ -76,7 +77,7 @@ const register = () => {
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="name">Full Name</Label>
-                                                    <Input onChange={(e) => {setName(e.target.value)}} type="text" className="form-control" id="name" placeholder="Firstname Lastname" required />
+                                                    <Input onChange={(e) => {setName(e.target.value)}} type="text" className="form-control" id="name" placeholder="Enter your full name" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -111,7 +112,7 @@ const register = () => {
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label className='mb-3' htmlFor="phone">Phone no.</Label>
-                                                    <Input onChange={(e) => setPhone(e.target.value)} type="number" className="form-control" id="phone" placeholder="+91xxxxxxxxxx" required />
+                                                    <Input onChange={(e) => setPhone(e.target.value)} type="number" className="form-control" id="phone" placeholder="+91XXXXXXXXXX" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">
@@ -134,7 +135,7 @@ const register = () => {
                                     <h2 className="text-white">Looks like you are not registered with us.</h2>
                                     <p className="text-white m-t-30 op-8">
                                         Fill the details to quickly register with us!!
-                                        <br /> info@wrappixel.com
+                                        <br />
                                     </p>
                                 </div>
                             </Col>

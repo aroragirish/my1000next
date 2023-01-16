@@ -24,13 +24,12 @@ import { logoutApi } from "../../services/authService";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const {user, tokens} = useSelector(state => state.user);
-  console.log(user);
+  const { user, tokens } = useSelector(state => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
   const logout = () => {
-    logoutApi({refreshToken: tokens.refresh.token}).then((res) => {
+    logoutApi({ refreshToken: tokens.refresh.token }).then((res) => {
       dispatch({
         type: 'LOGOUT'
       });
@@ -57,19 +56,33 @@ const Header = () => {
               <Nav navbar className="ml-auto ">
                 {
                   user && <NavItem className="font-weight-bold">
-                  <Link href="/dashboard">
+                    <Link href="/dashboard">
+                      <a
+                        className={
+                          router.pathname == "/dashboard"
+                            ? "text-success nav-link"
+                            : "nav-link"
+                        }
+                      >
+                        Dashboard
+                      </a>
+                    </Link>
+                  </NavItem>
+                }
+                
+                <NavItem className="font-weight-bold">
+                  <Link href="/product">
                     <a
                       className={
-                        router.pathname == "/dashboard"
+                        router.pathname == "/product"
                           ? "text-success nav-link"
                           : "nav-link"
                       }
                     >
-                      Dashboard
+                      Businesses
                     </a>
                   </Link>
                 </NavItem>
-                }
                 <NavItem className="font-weight-bold">
                   <Link href="/about">
                     <a
@@ -80,19 +93,6 @@ const Header = () => {
                       }
                     >
                       About
-                    </a>
-                  </Link>
-                </NavItem>
-                <NavItem className="font-weight-bold">
-                  <Link href="/product">
-                    <a
-                      className={
-                        router.pathname == "/product"
-                          ? "text-success nav-link"
-                          : "nav-link"
-                      }
-                    >
-                      Product
                     </a>
                   </Link>
                 </NavItem>
@@ -111,29 +111,38 @@ const Header = () => {
                 </NavItem>
               </Nav>
               {user ? <ButtonGroup>
-              <UncontrolledDropdown setActiveFromChild>
-                <DropdownToggle tag="button" className="btn btn-success text-dark font-weight-bold" caret>
-                  {user.name}
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem tag="a" onClick={logout}>
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </ButtonGroup> : <div className="act-buttons font-weight-bold">
+                <UncontrolledDropdown setActiveFromChild>
+                  <DropdownToggle tag="button" className="btn btn-success text-dark font-weight-bold" caret>
+                    {user.name}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem tag="a" onClick={logout}>
+                      Logout
+                    </DropdownItem>
+
+                    {user?.role === 'business' && <DropdownItem >
+                      <Link
+                        href="/add-business"
+                        passHref
+                      >
+                      <a className="text-dark">  Add Business</a>
+                      </Link>
+                    </DropdownItem>}
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </ButtonGroup> : <div className="act-buttons font-weight-bold">
                 <Link
                   href="/get-started"
                   passHref
-                  >
-                <NavLink
-                  className="btn btn-success text-dark font-weight-bold"
                 >
-                  Login/Register
-                </NavLink>
+                  <NavLink
+                    className="btn btn-success text-dark font-weight-bold"
+                  >
+                    Login/Register
+                  </NavLink>
                 </Link>
               </div>}
-              
+
 
             </Collapse>
           </Navbar>

@@ -27,21 +27,19 @@ client.interceptors.response.use((res) => {
   mainWrapper.classList.remove('less-opaque');
   loader.classList.remove('lds-hourglass');
   if (res.status === 401) {
-    store.dispatch({
-      type: 'LOGOUT'
-    });
-    router.push('/get-started')
+    router.push('/dashboard')
   }
   return res;
 });
 
 const select = (state) => {
+  console.log(state);
   return state?.user?.tokens?.access?.token
 }
 
 const listener = () => {
   let token = select(store.getState())
-  client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  client.defaults.headers.common['authorization'] = `Bearer ${token}`;
 }
 
 store.subscribe(listener)
@@ -50,7 +48,7 @@ const baseService = (options) => {
   const newOptions = {
     ...options,
     headers: {
-      ...options.headers,
+      ...options.headers
     },
   };
   const onSuccess = (response) => {
@@ -63,11 +61,8 @@ const baseService = (options) => {
   
     mainWrapper.classList.remove('less-opaque');
     loader.classList.remove('lds-hourglass');
-    if (error.response.status === 401) {
-      store.dispatch({
-        type: 'LOGOUT'
-      });
-      router.push('/get-started')
+    if (error?.response?.status === 401) {
+      router.push('/dashboard')
     }
     return Promise.reject(error);
   };

@@ -6,8 +6,6 @@ import img2 from "../assets/images/ui/5.jpg";
 import img3 from "../assets/images/ui/img5.jpg";
 import TeamComponent from "../components/custom/sections/teamcomponent";
 
-import CustomComponents from "../components/custom/Custom-components";
-import FormBannerComponent from "../components/custom/sections/formbannercomponent";
 const About = () => {
     return (
         <>

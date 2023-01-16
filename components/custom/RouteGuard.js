@@ -11,7 +11,6 @@ function RouteGuard({ children }) {
 
     useEffect(() => {
         // on initial load - run auth check 
-        console.log(router.asPath);
         authCheck(router.asPath);
         // on route change start - hide page content by setting authorized to false  
         const hideContent = () => {

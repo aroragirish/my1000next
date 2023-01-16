@@ -1,5 +1,4 @@
 import Head from "next/head";
-import CustomComponents from "../components/custom/Custom-components";
 import Banner2 from "../components/banner/Banner2";
 import PortfolioComponent from "../components/custom/sections/portfoliocomponent";
 import BlogComponent from "../components/custom/sections/blogcomponent";
