@@ -9,21 +9,32 @@ import { getAllCategories } from "../services/categoryService";
 const Products = () => {
   const [businesses, setBusinesses] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(0);
   const [category, setCategory] = useState('all');
 
-    useEffect(() => {
-        getAllBusinesses().then((res) => {
-            setBusinesses(res.data);
+    useEffect(() => [
         getAllCategories().then((res) => {
-              setCategories(res.data);
-          })
+            setCategories(res.data);
         })
-    }, []);
-    useEffect(() => {
-      getAllBusinessesByCategory(category).then((res) => {
+    ], []);
+
+    useEffect(async () => {
+      getAllBusinessesByCategory(category, 0, 6).then((res) => {
+        setPage(1);
         setBusinesses(res.data);
       });
     }, [category]);
+
+    const loadmore = () => {
+        getAllBusinessesByCategory(category, page, 6).then((res) => {
+            setPage(page => page + 1);
+            setBusinesses([
+                ...businesses,
+                ...res.data
+            ]);
+          });
+    }
+
     return (
         <>
         
@@ -137,6 +148,10 @@ const Products = () => {
                         </Col>
                                 )
                             })}
+                            
+                    <div className="text-center mt-5 w-100">
+                        <button onClick={loadmore} className="btn btn-outline-dark text-muted">Load More</button>
+                    </div>
                     </Row>
                 </Container>
             </div>

@@ -18,10 +18,14 @@ export const getAllBusinesses = (data) => {
     });
 };
 
-export const getAllBusinessesByCategory = (category) => {
+export const getAllBusinessesByCategory = (category, page, perPage) => {
     return baseService({
         url: `/v1/business/category/${category}`,
-        method: "GET"
+        method: "POST",
+        data: {
+            page,
+            perPage
+        }
     });
 };
 

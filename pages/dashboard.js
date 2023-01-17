@@ -23,7 +23,9 @@ const dashboard = () => {
         <div className="mt-5">
             <div className="blog-home2">
                 <Container>
-                    <Row className="justify-content-between">
+                    <Row style={{
+                        alignItems: 'center'
+                    }} className="justify-content-between">
                         <Col md="8" className="text-left">
                             <h2 className="title">Top Investment Opportunities</h2>
                             <h6 className="subtitle">
