@@ -31,7 +31,7 @@ const AddBusiness = () => {
     const [file, setFile] = useState(null);
     const [perShare, setPerShare] = useState();
 
-    
+
     const [email, setEmail] = useState('');
     const [tenureDuration, setSelectedTenureDuration] = useState('weeks');
     const [category, setCategory] = useState('');
@@ -89,27 +89,27 @@ const AddBusiness = () => {
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="title">Title</Label>
-                                                    <Input value={title} onChange={(e) => {setTitle(e.target.value)}} type="text" className="form-control" id="title" placeholder="Enter title" required />
+                                                    <Input value={title} onChange={(e) => { setTitle(e.target.value) }} type="text" className="form-control" id="title" placeholder="Enter title" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
-                                            <FormGroup className="m-t-15">
-                                                <Label for="category">Category</Label>
-                                                <Input value={category} onChange={(e) => setCategory(e.target.value)} style={{                                                    
-                                                    height: '-webkit-calc(1.5em + 0.75rem + 2px)',
-                                                    padding: 0
-                                                }} className='form-control' type='select' name="category" id="category">
-                                                    <option>Please select category</option>
-                                                    {categories.map((category) => {
-                                                        return <option value={category.value}>{category.label}</option>;
-                                                    })}
-                                                </Input >
-                                            </FormGroup>
+                                                <FormGroup className="m-t-15">
+                                                    <Label for="category">Category</Label>
+                                                    <Input value={category} onChange={(e) => setCategory(e.target.value)} style={{
+                                                        height: '-webkit-calc(1.5em + 0.75rem + 2px)',
+                                                        padding: 0
+                                                    }} className='form-control' type='select' name="category" id="category">
+                                                        <option>Please select category</option>
+                                                        {categories.map((category) => {
+                                                            return <option key={category.value} value={category.value}>{category.label}</option>;
+                                                        })}
+                                                    </Input >
+                                                </FormGroup>
                                             </Col>
                                             <Col lg="12">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="description">Description</Label>
-                                                    <Input value={description} onChange={(e) => {setDesc(e.target.value)}} type="textarea" className="form-control" id="description" required />
+                                                    <Input value={description} onChange={(e) => { setDesc(e.target.value) }} type="textarea" className="form-control" id="description" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -121,13 +121,13 @@ const AddBusiness = () => {
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="preTaxReturns">Pre Tax Returns</Label>
-                                                    <Input value={preTaxReturns} onChange={(e) => {setPreTaxReturns(e.target.value)}} type="number" className="form-control" id="title" placeholder="%" required />
+                                                    <Input value={preTaxReturns} onChange={(e) => { setPreTaxReturns(e.target.value) }} type="number" className="form-control" id="title" placeholder="%" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="tenure">Tenure</Label>
-                                                    <Input value={tenure} onChange={(e) => {setTenure(e.target.value)}} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
+                                                    <Input value={tenure} onChange={(e) => { setTenure(e.target.value) }} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -164,13 +164,13 @@ const AddBusiness = () => {
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="minInvestment">Min Investment</Label>
-                                                    <Input value={minInvestment} onChange={(e) => {setMinimumInvestment(e.target.value)}} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
+                                                    <Input value={minInvestment} onChange={(e) => { setMinimumInvestment(e.target.value) }} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="tax">Total tax</Label>
-                                                    <Input value={tax} onChange={(e) => {setTax(e.target.value)}} type="number" className="form-control" id="title" placeholder="₹" required />
+                                                    <Input value={tax} onChange={(e) => { setTax(e.target.value) }} type="number" className="form-control" id="title" placeholder="₹" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
@@ -191,10 +191,26 @@ const AddBusiness = () => {
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">
-                                                <FormGroup  className="m-t-15">
+                                                <FormGroup className="m-t-15">
                                                     <Label htmlFor="extraInfo">Give us some extra information about your business</Label>
 
-                                                    <MyEditor value={extraInfo} onChange={setValue} id="rte" />
+                                                    <MyEditor placeholder='Enter extra info about your business here like highlights, email, phone, address. Use all options to add more good looking content' value={extraInfo} onChange={setValue} id="rte" />
+                                                </FormGroup>
+                                            </Col>
+                                            
+                                            <Col lg="12">
+                                                <FormGroup check>
+                                                    <Input style={{
+                                                        height: '20px',
+                                                        width: '20px',
+                                                    }} required type="checkbox" />
+                                                    {'  '}
+                                                    <Label style={{
+                                                        fontSize: '20px',
+                                                        marginLeft: '10px'
+                                                    }} check>
+                                                        I understand all <a href='#'>Terms and conditions</a>
+                                                    </Label>
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">

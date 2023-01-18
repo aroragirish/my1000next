@@ -33,7 +33,6 @@ client.interceptors.response.use((res) => {
 });
 
 const select = (state) => {
-  console.log(state);
   return state?.user?.tokens?.access?.token
 }
 

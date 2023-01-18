@@ -18,7 +18,7 @@ import {
   DropdownItem,
   ButtonGroup
 } from "reactstrap";
-import logo from "../../assets/images/logos/white-text.png";
+import logo from "../../assets/images/team/white-text.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutApi } from "../../services/authService";
 
@@ -120,12 +120,20 @@ const Header = () => {
                       Logout
                     </DropdownItem>
 
-                    {user?.role === 'business' && <DropdownItem >
+                    {user?.role !== 'investor' && <DropdownItem >
                       <Link
                         href="/add-business"
                         passHref
                       >
                       <a className="text-dark">  Add Business</a>
+                      </Link>
+                    </DropdownItem>}
+                    {user?.role !== 'investor' && <DropdownItem >
+                      <Link
+                        href="/your-businesses"
+                        passHref
+                      >
+                      <a className="text-dark">{user?.role === 'admin' ? 'All Businesses' : 'Your Businesses'}</a>
                       </Link>
                     </DropdownItem>}
                   </DropdownMenu>

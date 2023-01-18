@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from "react";
 import Image from "next/image";
 import { Container, Row, Col, Card, FormGroup, Form, Label, Input } from "reactstrap";
-import img3 from "../assets/images/ui/img5.jpg";
+// import img3 from "../assets/images/ui/img5.jpg";
 import { getAllBusinesses, getAllBusinessesByCategory } from "../services/businessService";
 import { getAllCategories } from "../services/categoryService";
-
+import Link from "next/link";
 
 const Products = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -41,9 +41,9 @@ const Products = () => {
             <div className="static-slider-head banner2 bg-dark text-center">
                 <Container>
                     <Row className=" d-flex align-items-center justify-content-center">
-                        <Col lg="6" md="6" className="align-self-center">
+                        {/* <Col lg="6" md="6" className="align-self-center">
                             <Image src={img3} alt="img" className="img-responsive img-rounded"  />
-                        </Col>
+                        </Col> */}
                         <Col lg="6" md="6" className="align-self-center">
                             <h4 className="subtitle font-light">Products</h4>
                             <h1 className="title mb-5">
@@ -70,21 +70,22 @@ const Products = () => {
                               }} className='form-control' type='select' name="category" id="category">
                                   <option value={'all'}>All</option>
                                   {categories.map((category) => {
-                                      return <option value={category.value}>{category.label}</option>;
+                                      return <option key={category.value} value={category.value}>{category.label}</option>;
                                   })}
                               </Input >
                           </FormGroup>
                         </Col>
                     </Row>
-                    <Row className="justify-content-between">
+                    <Row className="justify-content-left">
                         
-                            {businesses.map((business) => {
+                            {businesses.length ? businesses.map((business) => {
                                 return (
-                                    <Col className="m-t-40" lg="4" md="6">
+                                    <Col key={business._id} className="m-t-40" lg="4" md="6">
                                     <Card style={{
                                             padding: '10px',
                                             boxShadow: '2px 2px 2px 2px lightgrey'
                                     }}>
+                                    <Link href={`/product/${business._id}`} className="linking text-themecolor m-t-5" passHref>
                                         <a href="#">
                                             <Image
                                                 width={370}
@@ -94,6 +95,7 @@ const Products = () => {
                                                 alt="wrappixel kit"
                                             />
                                         </a>
+                                    </Link>
                                         <div className="date-pos bg-info-gradiant">
                                             upto<span>{business.preTaxReturns}%</span>
                                         </div>
@@ -140,18 +142,29 @@ const Products = () => {
                                                 </div>
                                             </Col>
                                         </Row>
-                                        <a href="#" className="linking text-themecolor m-t-5">
-                                            Learn More <i className="ti-arrow-right"></i>
-                                        </a>
+                                        <Link href={`/product/${business._id}`} className="linking text-themecolor m-t-5" passHref>
+                                            <a>Learn More <i className="ti-arrow-right"></i></a>
+                                        </Link>
                                     </Card>
                                     
                         </Col>
                                 )
-                            })}
+                            }) : (
+                                <Container  style={{
+                                    minHeight: '300px',
+                                    marginTop: '200px'
+                                }} >
+                                    <h1 className="text-center text-muted">
+                                        No Businesses are listed as of now
+                                    </h1>
+                                </Container>
+                            )}
                             
-                    <div className="text-center mt-5 w-100">
-                        <button onClick={loadmore} className="btn btn-outline-dark text-muted">Load More</button>
-                    </div>
+                    {businesses.length !== 0 && (
+                        <div className="text-center mt-5 w-100">
+                            <button onClick={loadmore} className="btn btn-outline-dark text-muted">Load More</button>
+                        </div>
+                    )}
                     </Row>
                 </Container>
             </div>
@@ -159,7 +172,7 @@ const Products = () => {
       </div>
     </div>
 
-            <section className="bg-dark pt-5 pb-5">
+            {/* <section className="bg-dark pt-5 pb-5">
                 <div className="container">
                     <p className="text-center text-light">Our numbers</p>
                     <h1 className="text-center text-white w-lg-75 mx-auto fs-xl-6 fs-lg-4 fs-3">Handshake infographic mass market crowdfunding iteration.</h1>
@@ -187,7 +200,7 @@ const Products = () => {
                     </div>                       
                     </div>
                 </div>
-            </section>
+            </section> */}
         </>
     )
 }

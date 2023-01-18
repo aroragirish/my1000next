@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Card, FormGroup, Button } from "reactstrap";
 import Image from "next/image";
-import img1 from "../assets/images/portfolio/delhi2.jpg";
-import img2 from "../assets/images/portfolio/gym.jpg";
-import img3 from "../assets/images/blog/blog-home/img1.jpg";
 import img4 from "../assets/images/portfolio/laptop.png";
 
 import img5 from "../assets/images/portfolio/kyc.png";
@@ -22,7 +19,7 @@ const dashboard = () => {
     return (
         <div className="mt-5">
             <div className="blog-home2">
-                <Container>
+                {businesses.length && (<Container>
                     <Row style={{
                         alignItems: 'center'
                     }} className="justify-content-between">
@@ -38,14 +35,15 @@ const dashboard = () => {
                           </FormGroup>
                         </Col>
                     </Row>
-                    <Row className="justify-content-between">                        
+                    <Row className="justify-content-left">                        
                             {businesses.length ? businesses.sort((a,b) => (b.preTaxReturns - a.preTaxReturns)).slice(0, 3).map((business) => {
                                 return (
-                                    <Col className="m-t-40" lg="4" md="6">
+                                    <Col key={business._id} className="m-t-40" lg="4" md="6">
                                     <Card style={{
                                             padding: '10px',
                                             boxShadow: '2px 2px 2px 2px lightgrey'
                                     }}>
+                                        <Link href={`/product/${business._id}`} className="linking text-themecolor m-t-5" passHref>
                                         <a href="#">
                                             <Image
                                                 width={370}
@@ -55,6 +53,7 @@ const dashboard = () => {
                                                 alt="wrappixel kit"
                                             />
                                         </a>
+                                        </Link>
                                         <div className="date-pos bg-info-gradiant">
                                             upto<span>{business.preTaxReturns}%</span>
                                         </div>
@@ -101,16 +100,16 @@ const dashboard = () => {
                                                 </div>
                                             </Col>
                                         </Row>
-                                        <a href="#" className="linking text-themecolor m-t-5">
-                                            Learn More <i className="ti-arrow-right"></i>
-                                        </a>
+                                        <Link href={`/product/${business._id}`} className="linking text-themecolor m-t-5" passHref>
+                                            <a>Learn More <i className="ti-arrow-right"></i></a>
+                                        </Link>
                                     </Card>
                                     
                         </Col>
                                 )
                             }) : null }
                     </Row>
-                </Container>
+                </Container>)}
             </div>
             <div className="container mt-5 text-center">
                 <div className="row">

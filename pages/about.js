@@ -127,7 +127,6 @@ const About = () => {
                 </div>
 
             </section>
-            <TeamComponent />
             <section className="bg-dark pt-5 pb-5">
                 <div className="container">
                     <div className="px-xl-8 px-md-5 px-3">
@@ -159,6 +158,8 @@ const About = () => {
                 </div>
 
             </section>
+            
+            <TeamComponent />
         </>
     )
 }

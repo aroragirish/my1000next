@@ -4,7 +4,6 @@ import { Row, Col, Container } from "reactstrap";
 import Image from "next/image";
 import Link from "next/link";
 
-import herobanner from "../../../assets/images/staticslider/slider/hero-banner.png";
 const BannerComponent = () => {
   return (
     <div>
@@ -30,7 +29,7 @@ const BannerComponent = () => {
               </Link>
             </Col>
             <Col md="6" className="text-center">
-              <Image width={350} height={500} src={herobanner} alt="herobanner"></Image>
+              {/* <Image width={350} height={500} src={herobanner} alt="herobanner"></Image> */}
             </Col>
           </Row>
         </Container>
