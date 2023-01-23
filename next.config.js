@@ -7,6 +7,6 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'my1000bucket.s3.amazonaws.com'],
   },
 }

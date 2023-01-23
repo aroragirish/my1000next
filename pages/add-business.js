@@ -24,7 +24,7 @@ const AddBusiness = () => {
     const router = useRouter();
     
     const [tradeName, setTradeName] = useState('');
-
+    const [file, setFile] = useState();
     const [title, setTitle] = useState('');
     const [description, setDesc] = useState('');
     const [tags, setTags] = useState([]);
@@ -65,6 +65,7 @@ const AddBusiness = () => {
             targetToRaise,
             minInvestment: minSubscription,
             extraInfo,
+            image: file,
             aboutCompany: {
                 tradeName,
                 incorporationDate: incDate,
@@ -76,7 +77,7 @@ const AddBusiness = () => {
         }
         addBusiness(body).then(async (res) => {
             // await saveUser(res);
-            router.push('/dashboard');
+            // router.push('/dashboard');
         });
     }
     const handleKeyDown = (event) => {
@@ -220,6 +221,15 @@ const AddBusiness = () => {
                                                     <Input value={website} onChange={(e) => { setWebsite(e.target.value) }} type="string" className="form-control" id="website" placeholder="yourbusiness.com" required />
                                                 </FormGroup>
                                             </Col>
+                                            
+                                            <Col lg="6">
+                                                <FormGroup className="m-t-15">
+                                                    <Label htmlFor="file">Upload image for your Business</Label>
+                                                    <Input onChange={(e) => {
+                                                        setFile(e.target.files[0])
+                                                    }} type="file" id="file" required />
+                                                </FormGroup>
+                                            </Col>
                                             <Col lg="12">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="extraInfo">Give us some extra information about your business</Label>
@@ -227,7 +237,6 @@ const AddBusiness = () => {
                                                     <MyEditor placeholder='Enter extra info about your business here like highlights, email, phone, address. Use all options to add more good looking content' value={extraInfo} onChange={setValue} id="rte" />
                                                 </FormGroup>
                                             </Col>
-
                                             <Col lg="12">
                                                 <FormGroup check>
                                                     <Input style={{

@@ -36,7 +36,7 @@ const ProductId = () => {
                                 </strong>
                             </ToastHeader>
                         </div>
-                        <Image src={`${process.env.NEXT_PUBLIC_BE_URL}/${encodeURIComponent(business.image)}`} alt="" title="" width="100%" height="75%" layout="responsive" objectFit="contain" />
+                        <Image src={business.image} alt="" title="" width="100%" height="75%" layout="responsive" objectFit="contain" />
                         <h2>
                             Description:
                         </h2>

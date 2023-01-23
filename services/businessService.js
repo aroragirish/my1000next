@@ -5,6 +5,9 @@ export const addBusiness = (data) => {
         url: "/v1/business/add-business",
         method: "POST",
         data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     });
 };
 

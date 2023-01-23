@@ -49,7 +49,7 @@ const dashboard = () => {
                                                 width={370}
                                                 height={246}
                                                 className="card-img-top"
-                                                src={`${process.env.NEXT_PUBLIC_BE_URL}/${encodeURIComponent(business.image)}`}
+                                                src={business.image}
                                                 alt="wrappixel kit"
                                             />
                                         </a>
