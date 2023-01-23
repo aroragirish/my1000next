@@ -11,6 +11,7 @@ import {
     Input,
     Button,
     Label,
+    Badge,
     ButtonGroup
 } from "reactstrap";
 import axios from 'axios';
@@ -21,21 +22,23 @@ import { getAllCategories } from '../services/categoryService';
 const AddBusiness = () => {
     const dispatch = useDispatch();
     const router = useRouter();
+    
+    const [tradeName, setTradeName] = useState('');
 
     const [title, setTitle] = useState('');
     const [description, setDesc] = useState('');
-    const [preTaxReturns, setPreTaxReturns] = useState();
-    const [tenure, setTenure] = useState();
-    const [minInvestment, setMinimumInvestment] = useState();
-    const [tax, setTax] = useState();
-    const [file, setFile] = useState(null);
-    const [perShare, setPerShare] = useState();
-
-
+    const [tags, setTags] = useState([]);
+    const [targetToRaise, setTargetToRaise] = useState();
+    const [minSubscription, setMinSubscription] = useState();
+    const [incDate, setIncDate] = useState();
     const [email, setEmail] = useState('');
-    const [tenureDuration, setSelectedTenureDuration] = useState('weeks');
+    const [address, setAddress] = useState('');
+    const [website, setWebsite] = useState('');
+
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
+    const [firmType, setFirmType] = useState('pvtltd');
+    const [employees, setEmployees] = useState();
 
     const [extraInfo, setValue] = useState('');
 
@@ -55,24 +58,38 @@ const AddBusiness = () => {
         e.nativeEvent.stopImmediatePropagation();
         const body = {
             title,
-            description,
-            preTaxReturns,
-            tenure,
-            minInvestment,
-            tax,
-            email,
-            extraInfo,
-            tenureDuration,
             category,
-            perShare,
-            image: file
+            email,
+            categoryTags: tags,
+            description,
+            targetToRaise,
+            minInvestment: minSubscription,
+            extraInfo,
+            aboutCompany: {
+                tradeName,
+                incorporationDate: incDate,
+                firm: firmType,
+                empCount: employees,
+                website,
+                location: address
+            }
         }
         addBusiness(body).then(async (res) => {
             // await saveUser(res);
             router.push('/dashboard');
         });
     }
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 13 ) {
 
+          event.preventDefault();
+            setTags([
+                ...tags,
+                event.target.value
+            ]);
+            document.getElementById('tags').value = ''
+        }
+      }
     return (
         <div className="contact1 bg-dark">
             <Row>
@@ -109,85 +126,98 @@ const AddBusiness = () => {
                                             <Col lg="12">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="description">Description</Label>
-                                                    <Input value={description} onChange={(e) => { setDesc(e.target.value) }} type="textarea" className="form-control" id="description" required />
+                                                    <Input value={description} placeholder="maximum 300 characters" maxLength={300} onChange={(e) => { setDesc(e.target.value) }} type="textarea" className="form-control" id="description" required />
+                                                </FormGroup>
+                                            </Col><Col lg="12">
+                                                <FormGroup className="m-t-15">
+                                                    <Label htmlFor="tags">Tags</Label>
+                                                    <Input
+                                                    onKeyDown={handleKeyDown} placeholder="maximum 10 characters" maxLength={10}                                                        
+                                                    type="text" className="form-control" id="tags" />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="12">
+                                                <FormGroup className="m-t-15">
+                                                    {tags.map((tag) => {
+                                                        return (
+                                                            <Badge
+                                                                style={{
+                                                                    fontSize: '16px',
+                                                                    padding: '10px',
+                                                                    margin: '5px'
+                                                                }}
+                                                                key={tag}
+                                                                color="primary"
+                                                                pill
+                                                            >
+                                                                {tag} {' '}<span style={{
+                                                                    cursor: 'pointer'
+                                                                }} onClick={(e) => {
+                                                                    setTags((tags) => {
+                                                                        return tags.filter(t => tag !== t)
+                                                                    })
+                                                                }}>
+                                                                    x
+                                                                </span>
+                                                            </Badge>
+                                                        )
+                                                    })}
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="email">Email Address</Label>
-                                                    <Input value={email} disabled type="email" className="form-control" id="email" placeholder="yourid@email.com" required />
+                                                    <Label htmlFor="target">Target To Raise</Label>
+                                                    <Input value={targetToRaise} onChange={(e) => { setTargetToRaise(e.target.value) }} type="number" className="form-control" id="target" placeholder="₹" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="preTaxReturns">Pre Tax Returns</Label>
-                                                    <Input value={preTaxReturns} onChange={(e) => { setPreTaxReturns(e.target.value) }} type="number" className="form-control" id="title" placeholder="%" required />
+                                                    <Label htmlFor="target">Minimum investment</Label>
+                                                    <Input value={minSubscription} onChange={(e) => { setMinSubscription(e.target.value) }} type="number" className="form-control" id="target" placeholder="₹" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="tenure">Tenure</Label>
-                                                    <Input value={tenure} onChange={(e) => { setTenure(e.target.value) }} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
+                                                    <Label htmlFor="tradeName">Trade Name of your Business</Label>
+                                                    <Input value={tradeName} onChange={(e) => { setTradeName(e.target.value) }} type="text" className="form-control" id="tradeName" placeholder="Enter trade name" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <p>Tenure Duration:</p>
-                                                    <ButtonGroup>
-                                                        <Button
-                                                            color="primary"
-                                                            outline
-                                                            onClick={() => setSelectedTenureDuration('weeks')}
-                                                            active={tenureDuration === 'weeks'}
-                                                        >
-                                                            Weeks
-                                                        </Button>
-                                                        <Button
-                                                            color="primary"
-                                                            outline
-                                                            onClick={() => setSelectedTenureDuration('months')}
-                                                            active={tenureDuration === 'months'}
-                                                        >
-                                                            Months
-                                                        </Button>
-                                                        <Button
-                                                            color="primary"
-                                                            outline
-                                                            onClick={() => setSelectedTenureDuration('years')}
-                                                            active={tenureDuration === 'years'}
-                                                        >
-                                                            Years
-                                                        </Button>
-                                                    </ButtonGroup>
+                                                    <Label htmlFor="incDate">Incorporation Date</Label>
+                                                    <Input value={incDate} onChange={(e) => { setIncDate(e.target.value) }} type="date" className="form-control" id="incDate" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="minInvestment">Min Investment</Label>
-                                                    <Input value={minInvestment} onChange={(e) => { setMinimumInvestment(e.target.value) }} type="number" className="form-control" id="title" placeholder="Enter tenure" required />
+                                                    <Label for="firmType">Entity type</Label>
+                                                    <Input value={firmType} onChange={(e) => setFirmType(e.target.value)} style={{
+                                                        height: '-webkit-calc(1.5em + 0.75rem + 2px)',
+                                                        padding: 0
+                                                    }} className='form-control' type='select' name="firmType" id="firmType">
+                                                        <option value="pvtltd">Private Limited / Limited</option>;
+                                                        <option value="partnership">Partnership Firm</option>;
+                                                        <option value="proprietor">Proprietorship</option>;
+
+                                                    </Input >
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="tax">Total tax</Label>
-                                                    <Input value={tax} onChange={(e) => { setTax(e.target.value) }} type="number" className="form-control" id="title" placeholder="₹" required />
+                                                    <Label htmlFor="employees">Number of Employees</Label>
+                                                    <Input value={employees} onChange={(e) => { setEmployees(e.target.value) }} type="number" className="form-control" id="employees" placeholder="" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="dealSize">Share per min investment</Label>
-                                                    <Input value={perShare} onChange={(e) => {
-                                                        setPerShare(e.target.value)
-                                                    }} type="number" id="dealSize" placeholder="%" required />
+                                                    <Label htmlFor="address">Location</Label>
+                                                    <Input value={address} onChange={(e) => { setAddress(e.target.value) }} type="string" className="form-control" id="address" placeholder="Enter complete address" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="file">Upload image for your Business</Label>
-                                                    <Input onChange={(e) => {
-                                                        console.log(e.target.files[0])
-                                                        setFile(e.target.files[0])
-                                                    }} type="file" id="file" required />
+                                                    <Label htmlFor="website">Website</Label>
+                                                    <Input value={website} onChange={(e) => { setWebsite(e.target.value) }} type="string" className="form-control" id="website" placeholder="yourbusiness.com" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">
@@ -197,7 +227,7 @@ const AddBusiness = () => {
                                                     <MyEditor placeholder='Enter extra info about your business here like highlights, email, phone, address. Use all options to add more good looking content' value={extraInfo} onChange={setValue} id="rte" />
                                                 </FormGroup>
                                             </Col>
-                                            
+
                                             <Col lg="12">
                                                 <FormGroup check>
                                                     <Input style={{
