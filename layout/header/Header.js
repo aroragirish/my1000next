@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from 'axios';
+import axios from "axios";
 import { useRouter } from "next/router";
 import {
   Collapse,
@@ -16,7 +16,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  ButtonGroup
+  ButtonGroup,
 } from "reactstrap";
 import logo from "../../assets/images/team/white-text.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,18 +24,18 @@ import { logoutApi } from "../../services/authService";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { user, tokens } = useSelector(state => state.user);
+  const { user, tokens } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
   const logout = () => {
     logoutApi({ refreshToken: tokens.refresh.token }).then((res) => {
       dispatch({
-        type: 'LOGOUT'
+        type: "LOGOUT",
       });
-      router.push('/');
-    })
-  }
+      router.push("/");
+    });
+  };
   return (
     <div className="topbar fixed-top bg-dark" id="top">
       <div className="header6">
@@ -50,12 +50,12 @@ const Header = () => {
             <Collapse
               isOpen={isOpen}
               navbar
-              className="hover-dropdown ml-auto"
+              className="hover-dropdown ml-auto  justify-content-end"
               id="h6-info"
             >
-              <Nav navbar className="ml-auto ">
-                {
-                  user && <NavItem className="font-weight-bold">
+              <Nav navbar className="ml-auto">
+                {user && (
+                  <NavItem className="font-weight-bold">
                     <Link href="/dashboard">
                       <a
                         className={
@@ -68,8 +68,8 @@ const Header = () => {
                       </a>
                     </Link>
                   </NavItem>
-                }
-                
+                )}
+
                 <NavItem className="font-weight-bold">
                   <Link href="/product">
                     <a
@@ -110,48 +110,51 @@ const Header = () => {
                   </Link>
                 </NavItem>
               </Nav>
-              {user ? <ButtonGroup>
-                <UncontrolledDropdown setActiveFromChild>
-                  <DropdownToggle tag="button" className="btn btn-success text-dark font-weight-bold" caret>
-                    {user.name}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem tag="a" onClick={logout}>
-                      Logout
-                    </DropdownItem>
+              {user ? (
+                <ButtonGroup>
+                  <UncontrolledDropdown setActiveFromChild>
+                    <DropdownToggle
+                      tag="button"
+                      className="btn btn-success text-dark font-weight-bold"
+                      caret
+                    >
+                      {user.name}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem tag="a" onClick={logout}>
+                        Logout
+                      </DropdownItem>
 
-                    {user?.role !== 'investor' && <DropdownItem >
-                      <Link
-                        href="/add-business"
-                        passHref
-                      >
-                      <a className="text-dark">  Add Business</a>
-                      </Link>
-                    </DropdownItem>}
-                    {user?.role !== 'investor' && <DropdownItem >
-                      <Link
-                        href="/your-businesses"
-                        passHref
-                      >
-                      <a className="text-dark">{user?.role === 'admin' ? 'All Businesses' : 'Your Businesses'}</a>
-                      </Link>
-                    </DropdownItem>}
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </ButtonGroup> : <div className="act-buttons font-weight-bold">
-                <Link
-                  href="/get-started"
-                  passHref
-                >
-                  <NavLink
-                    className="btn btn-success text-dark font-weight-bold"
-                  >
-                    Login/Register
-                  </NavLink>
-                </Link>
-              </div>}
-
-
+                      {user?.role !== "investor" && (
+                        <DropdownItem>
+                          <Link href="/add-business" passHref>
+                            <a className="text-dark"> Add Business</a>
+                          </Link>
+                        </DropdownItem>
+                      )}
+                      {user?.role !== "investor" && (
+                        <DropdownItem>
+                          <Link href="/your-businesses" passHref>
+                            <a className="text-dark">
+                              {user?.role === "admin"
+                                ? "All Businesses"
+                                : "Your Businesses"}
+                            </a>
+                          </Link>
+                        </DropdownItem>
+                      )}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </ButtonGroup>
+              ) : (
+                <div className="act-buttons font-weight-bold">
+                  <Link href="/get-started" passHref>
+                    <NavLink className="btn btn-success text-dark font-weight-bold">
+                      Login/Register
+                    </NavLink>
+                  </Link>
+                </div>
+              )}
             </Collapse>
           </Navbar>
         </Container>
