@@ -19,6 +19,8 @@ import {
   AccordionBody,
   AccordionHeader,
   AccordionItem,
+  List,
+  ListItem,
 } from "reactstrap";
 import parse from "html-react-parser";
 import Image from "next/image";
@@ -92,14 +94,54 @@ const ProductId = () => {
                     <h2>About Us</h2>
                   </AccordionHeader>
                   <AccordionBody accordionId="2">
-                    <strong>
-                      This is the second item&#39;s accordion body.
-                    </strong>
-                    You can modify any of this with custom CSS or overriding our
-                    default variables. It&#39;s also worth noting that just
-                    about any HTML can go within the{" "}
-                    <code>.accordion-body</code>, though the transition does
-                    limit overflow.
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Trade Name</strong>
+                      </Col>
+                      <Col lg={8}>{business?.aboutCompany?.tradeName}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Firm</strong>
+                      </Col>
+                      <Col lg={8}>{business?.aboutCompany?.firm}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Employee Count</strong>
+                      </Col>
+                      <Col lg={8}>{business?.aboutCompany?.empCount}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Incorporation Date</strong>
+                      </Col>
+                      <Col lg={8}>
+                        {business?.aboutCompany?.incorporationDate}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Website</strong>
+                      </Col>
+                      <Col lg={8}>{business?.aboutCompany?.website}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4}>
+                        <strong>Social Media link</strong>
+                      </Col>
+                      <Col lg={8}>
+                        {business?.aboutCompany?.socialMediaLinks?.map(
+                          (link) => {
+                            return (
+                              <List>
+                                <li>{link}</li>
+                              </List>
+                            );
+                          }
+                        )}
+                      </Col>
+                    </Row>
                   </AccordionBody>
                 </AccordionItem>
               </Accordion>
