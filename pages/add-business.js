@@ -48,7 +48,7 @@ const AddBusiness = () => {
 
     const { user } = useSelector(state => state.user);
     useEffect(async () => {
-        if (user.role !== 'business') {
+        if (user?.role !== 'business') {
             router.push('/dashboard');
         }
         getAllCategories().then((res) => {

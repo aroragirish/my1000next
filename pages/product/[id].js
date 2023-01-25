@@ -188,7 +188,7 @@ const ProductId = () => {
             </div>
           </Col>
           <Col lg={3}>
-            {user.role === "admin" && !business.approved && (
+            {user?.role === "admin" && !business.approved && (
               <div>
                 <Button
                   onClick={() => {
@@ -271,12 +271,12 @@ const ProductId = () => {
                 </Col>
               </Row>
             </Card>
-            {user.role === "investor" && (
+            {user?.role === "investor" && (
               <Button className="w-100" color="primary">
                 Invest Now
               </Button>
             )}
-            {user.role === "business" && (
+            {user?.role === "business" && (
               <>
                 <Button disabled className="w-100" color="secondary">
                   Invest Now
@@ -286,8 +286,8 @@ const ProductId = () => {
                 </p>
               </>
             )}
-            <section>
-              <h3>Documents:</h3>
+            <section className="mt-3">
+              {business.documents.length !==0 && <h3>Documents:</h3>}
               {business.documents.map((doc) => {
               return (
                 <Button style={{
