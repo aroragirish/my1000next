@@ -12,7 +12,10 @@ import {
     Button,
     Label,
     Badge,
-    ButtonGroup
+    ButtonGroup,
+    UncontrolledPopover,
+    PopoverHeader,
+    PopoverBody
 } from "reactstrap";
 import axios from 'axios';
 import { registerApi } from '../services/authService';
@@ -22,12 +25,13 @@ import { getAllCategories } from '../services/categoryService';
 const AddBusiness = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    
+
     const [tradeName, setTradeName] = useState('');
     const [file, setFile] = useState();
     const [title, setTitle] = useState('');
     const [description, setDesc] = useState('');
     const [tags, setTags] = useState([]);
+    const [documents, setDocuments] = useState([]);
     const [targetToRaise, setTargetToRaise] = useState();
     const [minSubscription, setMinSubscription] = useState();
     const [incDate, setIncDate] = useState();
@@ -53,7 +57,28 @@ const AddBusiness = () => {
         setEmail(user.email);
     }, []);
 
+    const buildFormData = (formData, data, parentKey) => {
+        if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+            Object.keys(data).forEach(key => {
+                buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+            });
+        } else {
+            const value = data == null ? '' : data;
+
+            formData.append(parentKey, value);
+        }
+    }
+
+    const jsonToFormData = (data) => {
+        const formData = new FormData();
+
+        buildFormData(formData, data);
+
+        return formData;
+    }
+
     const submit = (e) => {
+        console.log(documents);
         e.preventDefault();
         e.nativeEvent.stopImmediatePropagation();
         const body = {
@@ -75,22 +100,25 @@ const AddBusiness = () => {
                 location: address
             }
         }
-        addBusiness(body).then(async (res) => {
-            // await saveUser(res);
-            // router.push('/dashboard');
+        const data = jsonToFormData(body);
+        for (const key of Object.keys(documents)) {
+            data.append('documents', documents[key])
+        }
+        addBusiness(data).then(async (res) => {
+            router.push('/dashboard');
         });
     }
     const handleKeyDown = (event) => {
-        if (event.keyCode === 13 ) {
+        if (event.keyCode === 13) {
 
-          event.preventDefault();
+            event.preventDefault();
             setTags([
                 ...tags,
                 event.target.value
             ]);
             document.getElementById('tags').value = ''
         }
-      }
+    }
     return (
         <div className="contact1 bg-dark">
             <Row>
@@ -114,8 +142,6 @@ const AddBusiness = () => {
                                                 <FormGroup className="m-t-15">
                                                     <Label for="category">Category</Label>
                                                     <Input value={category} onChange={(e) => setCategory(e.target.value)} style={{
-                                                        height: '-webkit-calc(1.5em + 0.75rem + 2px)',
-                                                        padding: 0
                                                     }} className='form-control' type='select' name="category" id="category">
                                                         <option>Please select category</option>
                                                         {categories.map((category) => {
@@ -133,8 +159,8 @@ const AddBusiness = () => {
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="tags">Tags</Label>
                                                     <Input
-                                                    onKeyDown={handleKeyDown} placeholder="maximum 10 characters" maxLength={10}                                                        
-                                                    type="text" className="form-control" id="tags" />
+                                                        onKeyDown={handleKeyDown} placeholder="maximum 10 characters" maxLength={10}
+                                                        type="text" className="form-control" id="tags" />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">
@@ -193,8 +219,6 @@ const AddBusiness = () => {
                                                 <FormGroup className="m-t-15">
                                                     <Label for="firmType">Entity type</Label>
                                                     <Input value={firmType} onChange={(e) => setFirmType(e.target.value)} style={{
-                                                        height: '-webkit-calc(1.5em + 0.75rem + 2px)',
-                                                        padding: 0
                                                     }} className='form-control' type='select' name="firmType" id="firmType">
                                                         <option value="pvtltd">Private Limited / Limited</option>;
                                                         <option value="partnership">Partnership Firm</option>;
@@ -221,13 +245,51 @@ const AddBusiness = () => {
                                                     <Input value={website} onChange={(e) => { setWebsite(e.target.value) }} type="string" className="form-control" id="website" placeholder="yourbusiness.com" required />
                                                 </FormGroup>
                                             </Col>
-                                            
+
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
                                                     <Label htmlFor="file">Upload image for your Business</Label>
-                                                    <Input onChange={(e) => {
+                                                    <Input name='image' onChange={(e) => {
                                                         setFile(e.target.files[0])
                                                     }} type="file" id="file" required />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup className="">
+                                                    <Label htmlFor="documents">Upload all required documents
+
+                                                    </Label>
+
+                                                    <div
+                                                            style={{
+                                                                display: 'inline'
+                                                            }}>
+                                                        <Button
+                                                            id="UncontrolledPopover"
+                                                            type="button"
+                                                            color='link'
+                                                        >
+                                                            (List)
+                                                        </Button>
+                                                        <UncontrolledPopover
+                                                            placement="top"
+                                                            target="UncontrolledPopover"
+                                                        >
+                                                            <PopoverHeader>
+                                                                Required documents
+                                                            </PopoverHeader>
+                                                            <PopoverBody>
+                                                              {firmType === 'pvtltd' ? 'All Directors KYC, Company Registration Certificate (COI), AOA, MOA, GST Cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance. ' : (
+                                                                firmType === 'partnership' ? 'Partnership Deed, All partners KYC, GST cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance.' :
+                                                                'Owner KYC, Shop act, MSME cert, Udyog adhar, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance'
+                                                              )}
+                                                            </PopoverBody>
+                                                        </UncontrolledPopover>
+                                                    </div>
+                                                    <Input name='documents' onChange={(e) => {
+                                                        console.log(e.target.files)
+                                                        setDocuments(e.target.files)
+                                                    }} type="file" id="documents" multiple required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="12">
@@ -255,7 +317,7 @@ const AddBusiness = () => {
                                             <Col lg="12">
                                                 <Button
                                                     type="submit"
-                                                    className="btn btn-danger-gradiant m-t-20 btn-arrow float-right"
+                                                    className="btn btn-danger-gradiant m-t-20 btn-arrow float-end"
                                                 >
                                                     <span>
                                                         {" "}

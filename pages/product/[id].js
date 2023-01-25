@@ -20,11 +20,16 @@ import {
   AccordionHeader,
   AccordionItem,
   List,
-  ListItem,
+  Badge,
 } from "reactstrap";
 import parse from "html-react-parser";
 import Image from "next/image";
+import googleDocs from '../../assets/images/logos/google-docs.png';
 import { useSelector, useDispatch } from "react-redux";
+
+function truncate(str, n){
+  return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+};
 
 const ProductId = () => {
   const [business, setBusiness] = useState();
@@ -37,6 +42,7 @@ const ProductId = () => {
   useEffect(() => {
     if (router?.query?.id) {
       getBusinessById(router.query.id).then((res) => {
+        console.log(res.data);
         setBusiness(res.data);
       });
     }
@@ -76,24 +82,58 @@ const ProductId = () => {
               width="100%"
               height="75%"
               layout="responsive"
-              objectFit="contain"
             />
-            <div>
+            <hr />
+            <section style={{
+              marginTop: '35px'
+            }}>
+              <strong style={{
+                fontSize: '32px'
+              }}>Tags:</strong> {business.categoryTags.map((tag) => {
+              return (
+              <h3 
+              style={{
+                display: 'inline',
+                margin: '5px',
+                fontSize: '32px'
+              }}
+              key={tag}>
+                <Badge
+                  color="dark"
+                  pill
+                >
+                  {tag}
+                </Badge>
+                </h3>
+              )
+            })}
+            </section>
+            <div style={{
+              marginTop: '20px',
+              fontSize: '20px'
+            }}>
               <Accordion open={open} toggle={toggle}>
-                <AccordionItem>
+              <AccordionItem>
                   <AccordionHeader targetId="1">
                     <h2>Description</h2>
                   </AccordionHeader>
                   <AccordionBody accordionId="1">
-                    <p>{business.description}</p>
-                    {parse(business.extraInfo)}
+                  <p>{business.description}</p>
                   </AccordionBody>
                 </AccordionItem>
                 <AccordionItem>
                   <AccordionHeader targetId="2">
-                    <h2>About Us</h2>
+                    <h2>More Info</h2>
                   </AccordionHeader>
                   <AccordionBody accordionId="2">
+                    {parse(business.extraInfo)}
+                  </AccordionBody>
+                </AccordionItem>
+                <AccordionItem>
+                  <AccordionHeader targetId="3">
+                    <h2>About Us</h2>
+                  </AccordionHeader>
+                  <AccordionBody accordionId="3">
                     <Row>
                       <Col lg={4}>
                         <strong>Trade Name</strong>
@@ -176,7 +216,7 @@ const ProductId = () => {
               style={{
                 padding: "10px",
                 paddingLeft: "25px",
-                marginTop: "157px",
+                marginTop: "97px",
                 boxShadow: "2px 2px 2px 2px lightgrey",
               }}
             >
@@ -246,6 +286,29 @@ const ProductId = () => {
                 </p>
               </>
             )}
+            <section>
+              <h3>Documents:</h3>
+              {business.documents.map((doc) => {
+              return (
+                <Button style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: '5px'
+                }} size="lg" color="primary" onClick={()=> window.open(doc.location, "_blank")} outline>
+                  <Image height={25} width={25} src={googleDocs} />
+                  <span style={{
+                    marginLeft: '10px',
+                    textAlign: "center",
+                    textOverflow: 'ellipsis'
+                  }}> 
+                  {truncate(doc.name, 15)}
+                  </span>
+                </Button>
+              )
+            })}
+            </section>
           </Col>
         </Row>
         <Modal

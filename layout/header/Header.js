@@ -115,10 +115,10 @@ const Header = () => {
                   <UncontrolledDropdown setActiveFromChild>
                     <DropdownToggle
                       tag="button"
-                      className="btn btn-success text-dark font-weight-bold"
+                      className="btn btn-success text-black"
                       caret
                     >
-                      {user.name}
+                    <strong>  {user.name}</strong>
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem tag="a" onClick={logout}>
@@ -128,14 +128,14 @@ const Header = () => {
                       {user?.role !== "investor" && (
                         <DropdownItem>
                           <Link href="/add-business" passHref>
-                            <a className="text-dark"> Add Business</a>
+                            <a className="text-black"> Add Business</a>
                           </Link>
                         </DropdownItem>
                       )}
                       {user?.role !== "investor" && (
                         <DropdownItem>
                           <Link href="/your-businesses" passHref>
-                            <a className="text-dark">
+                            <a className="text-black">
                               {user?.role === "admin"
                                 ? "All Businesses"
                                 : "Your Businesses"}
@@ -149,7 +149,7 @@ const Header = () => {
               ) : (
                 <div className="act-buttons font-weight-bold">
                   <Link href="/get-started" passHref>
-                    <NavLink className="btn btn-success text-dark font-weight-bold">
+                    <NavLink className="btn btn-success text-black font-weight-bold">
                       Login/Register
                     </NavLink>
                   </Link>
