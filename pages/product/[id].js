@@ -24,12 +24,12 @@ import {
 } from "reactstrap";
 import parse from "html-react-parser";
 import Image from "next/image";
-import googleDocs from '../../assets/images/logos/google-docs.png';
+import googleDocs from "../../assets/images/logos/google-docs.png";
 import { useSelector, useDispatch } from "react-redux";
 
-function truncate(str, n){
-  return (str.length > n) ? str.slice(0, n-1) + '...' : str;
-};
+function truncate(str, n) {
+  return str.length > n ? str.slice(0, n - 1) + "..." : str;
+}
 
 const ProductId = () => {
   const [business, setBusiness] = useState();
@@ -84,46 +84,53 @@ const ProductId = () => {
               layout="responsive"
             />
             <hr />
-            <section style={{
-              marginTop: '35px'
-            }}>
-              <strong style={{
-                fontSize: '32px'
-              }}>Tags:</strong> {business.categoryTags.map((tag) => {
-              return (
-              <h3 
+            <section
               style={{
-                display: 'inline',
-                margin: '5px',
-                fontSize: '32px'
+                marginTop: "35px",
               }}
-              key={tag}>
-                <Badge
-                  color="dark"
-                  pill
-                >
-                  {tag}
-                </Badge>
-                </h3>
-              )
-            })}
+            >
+              <strong
+                style={{
+                  fontSize: "21px",
+                }}
+              >
+                Tags:
+              </strong>{" "}
+              {business.categoryTags.map((tag) => {
+                return (
+                  <h3
+                    style={{
+                      display: "inline",
+                      margin: "5px",
+                      fontSize: "21px",
+                    }}
+                    key={tag}
+                  >
+                    <Badge color="dark" pill>
+                      {tag}
+                    </Badge>
+                  </h3>
+                );
+              })}
             </section>
-            <div style={{
-              marginTop: '20px',
-              fontSize: '20px'
-            }}>
+            <div
+              style={{
+                marginTop: "20px",
+                fontSize: "20px",
+              }}
+            >
               <Accordion open={open} toggle={toggle}>
-              <AccordionItem>
+                <AccordionItem>
                   <AccordionHeader targetId="1">
-                    <h2>Description</h2>
+                    <h4>Description</h4>
                   </AccordionHeader>
                   <AccordionBody accordionId="1">
-                  <p>{business.description}</p>
+                    <p>{business.description}</p>
                   </AccordionBody>
                 </AccordionItem>
                 <AccordionItem>
                   <AccordionHeader targetId="2">
-                    <h2>More Info</h2>
+                    <h4>More Info</h4>
                   </AccordionHeader>
                   <AccordionBody accordionId="2">
                     {parse(business.extraInfo)}
@@ -131,7 +138,7 @@ const ProductId = () => {
                 </AccordionItem>
                 <AccordionItem>
                   <AccordionHeader targetId="3">
-                    <h2>About Us</h2>
+                    <h4>About Us</h4>
                   </AccordionHeader>
                   <AccordionBody accordionId="3">
                     <Row>
@@ -287,27 +294,35 @@ const ProductId = () => {
               </>
             )}
             <section className="mt-3">
-              {business.documents.length !==0 && <h3>Documents:</h3>}
+              {business.documents.length !== 0 && <h3>Documents:</h3>}
               {business.documents.map((doc) => {
-              return (
-                <Button style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginBottom: '5px'
-                }} size="lg" color="primary" onClick={()=> window.open(doc.location, "_blank")} outline>
-                  <Image height={25} width={25} src={googleDocs} />
-                  <span style={{
-                    marginLeft: '10px',
-                    textAlign: "center",
-                    textOverflow: 'ellipsis'
-                  }}> 
-                  {truncate(doc.name, 15)}
-                  </span>
-                </Button>
-              )
-            })}
+                return (
+                  <Button
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: "5px",
+                    }}
+                    size="lg"
+                    color="primary"
+                    onClick={() => window.open(doc.location, "_blank")}
+                    outline
+                  >
+                    <Image height={25} width={25} src={googleDocs} />
+                    <span
+                      style={{
+                        marginLeft: "10px",
+                        textAlign: "center",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {truncate(doc.name, 15)}
+                    </span>
+                  </Button>
+                );
+              })}
             </section>
           </Col>
         </Row>
