@@ -13,21 +13,18 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import {
-  deleteBusiness,
-  getBusinessesByUser,
-} from "../services/businessService";
+import { getMyorders, addOrder } from "../services/orderService";
 
-const YourBusinesses = () => {
-  const [businesses, setBusinesses] = useState([]);
+const YourOrders = () => {
+  const [orders, setOrders] = useState([]);
   const [selectedBusinessId, setSelectedBusinessId] = useState();
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   useEffect(() => {
-    getBusinessesByUser().then((res) => {
-      setBusinesses(res.data);
+    getMyorders().then((res) => {
+      setOrders(res.data);
     });
   }, []);
   return (
@@ -39,14 +36,14 @@ const YourBusinesses = () => {
       }}
       className="mt-5"
     >
-      {!businesses.length ? (
+      {!orders.length ? (
         <h1
           style={{
             marginTop: "150px",
           }}
           className="text-center"
         >
-          You don't have any business added
+          You don't have any Order added
         </h1>
       ) : (
         <Table
@@ -60,44 +57,30 @@ const YourBusinesses = () => {
               <th>#</th>
               <th>Title</th>
               <th>Category</th>
-              <th>Description</th>
+              <th>Amount Invested</th>
+              <th>Min Investment</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {businesses.map((business, index) => {
+            {orders.map((order, index) => {
               return (
-                <tr key={business.id}>
+                <tr key={order.id}>
                   <th scope="row">{index + 1}</th>
-                  <td>{business.title}</td>
-                  <td>{business.category.toUpperCase()}</td>
-                  <td>{business.description}</td>
-                  <td>{business.approved ? "Approved" : "Pending Approval"}</td>
+                  <td>{order?.business?.businessId}</td>
+                  <td>{order?.business?.category?.toUpperCase()}</td>
+                  <td>{order?.business?.amountInvested}</td>
+                  <td>{order?.business?.minInvestment}</td>
+                  <td>{order.status}</td>
                   <td className="inline-flex">
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        router.push(`/product/${business._id}`);
-                      }}
-                      size="sm"
-                      className="m-1"
-                    >
-                      {/* <Link href={`/product/${business._id}`}>View</Link> */}
-                      View
+                    <Button color="primary" size="sm" className="m-1">
+                      Pay
                     </Button>
-                    {/* <Button className='text-info' color="link">
-                                            Edit
-                                        </Button> */}
-                    <Button
-                      onClick={() => {
-                        toggle();
-                        setSelectedBusinessId(business._id);
-                      }}
-                      color="danger"
-                      className="m-1"
-                      size="sm"
-                    >
+                    {/* <Button className="text-info" color="link">
+                      Edit
+                    </Button> */}
+                    <Button color="danger" className="m-1" size="sm">
                       Delete
                     </Button>
                   </td>
@@ -107,7 +90,7 @@ const YourBusinesses = () => {
           </tbody>
         </Table>
       )}
-      <Modal isOpen={modal} toggle={toggle}>
+      {/* <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Delete Business</ModalHeader>
         <ModalBody>Are you sure? You want to delete this business?</ModalBody>
         <ModalFooter>
@@ -128,9 +111,9 @@ const YourBusinesses = () => {
             Cancel
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
 
-export default YourBusinesses;
+export default YourOrders;

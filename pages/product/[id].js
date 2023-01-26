@@ -279,7 +279,13 @@ const ProductId = () => {
               </Row>
             </Card>
             {user?.role === "investor" && (
-              <Button className="w-100" color="primary">
+              <Button
+                className="w-100"
+                color="primary"
+                onClick={() => {
+                  router.push(`/checkout/${business._id}`);
+                }}
+              >
                 Invest Now
               </Button>
             )}
