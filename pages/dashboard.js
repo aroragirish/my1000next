@@ -18,7 +18,7 @@ const dashboard = () => {
   return (
     <div className="mt-5">
       <div className="blog-home2">
-        {businesses.length === 0 && (
+        {businesses.length !== 0 && (
           <Container>
             <Row
               style={{

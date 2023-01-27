@@ -30,35 +30,25 @@ function truncate(str, n) {
 }
 
 const ProductId = () => {
-  const [business, setBusiness] = useState();
-  const { user } = useSelector((state) => state.user);
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [approveModal, setApproveModal] = useState(false);
-  const [selectedBusinessId, setSelectedBusinessId] = useState();
-  const [open, setOpen] = useState("1");
-  const [investment, setInvestment] = useState(0);
+  const { checkedOutOrder } = useSelector((state) => state.order);
+  const [business] = useState(checkedOutOrder);
+  const [investment, setInvestment] = useState();
   const [trsId, setTrsId] = useState("xxx1234xxx");
   const [description, setDesc] = useState("Provide details ......");
   const [file, setFile] = useState();
   const [payment, setPayment] = useState("offline");
   const [offlinepayment, setofflinePayment] = useState("upi");
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (router?.query?.id) {
-      getBusinessById(router.query.id).then((res) => {
-        console.log(res.data);
-        setBusiness(res.data);
-        setInvestment(res?.data?.minInvestment);
-      });
+    if (business) {
+        setInvestment(business.minInvestment);
+    }
+    return () => {
+        dispatch({
+            type: 'ADD_PENDING_ORDER'
+        })
     }
   }, []);
-  const toggle = (id) => {
-    if (open === id) {
-      setOpen();
-    } else {
-      setOpen(id);
-    }
-  };
   const checkout = () => {
     console.log(investment);
     const body = {

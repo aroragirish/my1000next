@@ -38,7 +38,7 @@ const ProductId = () => {
   const [approveModal, setApproveModal] = useState(false);
   const [selectedBusinessId, setSelectedBusinessId] = useState();
   const [open, setOpen] = useState("1");
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (router?.query?.id) {
       getBusinessById(router.query.id).then((res) => {
@@ -54,6 +54,14 @@ const ProductId = () => {
       setOpen(id);
     }
   };
+  const checkoutProduct = () => {
+    dispatch({
+      type: 'ADD_PENDING_ORDER',
+      payload: business
+    });
+    router.push('/checkout');
+  }
+
   if (business) {
     return (
       <Container
@@ -282,9 +290,7 @@ const ProductId = () => {
               <Button
                 className="w-100"
                 color="primary"
-                onClick={() => {
-                  router.push(`/checkout/${business._id}`);
-                }}
+                onClick={checkoutProduct}
               >
                 Invest Now
               </Button>
