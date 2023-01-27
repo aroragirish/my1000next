@@ -17,6 +17,8 @@ import {
   FormGroup,
   Input,
   Label,
+  Alert,
+  FormFeedback,
 } from "reactstrap";
 import parse from "html-react-parser";
 import Image from "next/image";
@@ -35,15 +37,18 @@ const ProductId = () => {
   const [selectedBusinessId, setSelectedBusinessId] = useState();
   const [open, setOpen] = useState("1");
   const [investment, setInvestment] = useState(0);
-  const [trsId, setTrsId] = useState();
-  const [description, setDesc] = useState("");
+  const [trsId, setTrsId] = useState("xxx1234xxx");
+  const [description, setDesc] = useState("Provide details ......");
   const [file, setFile] = useState();
+  const [payment, setPayment] = useState("offline");
+  const [offlinepayment, setofflinePayment] = useState("upi");
 
   useEffect(() => {
     if (router?.query?.id) {
       getBusinessById(router.query.id).then((res) => {
         console.log(res.data);
         setBusiness(res.data);
+        setInvestment(res?.data?.minInvestment);
       });
     }
   }, []);
@@ -100,7 +105,14 @@ const ProductId = () => {
 
     return formData;
   };
-
+  const onChangeValue = (event) => {
+    setPayment(event.target.value);
+    console.log(event.target.value);
+  };
+  const onChangeOfflineValue = (event) => {
+    setofflinePayment(event.target.value);
+    console.log(event.target.value);
+  };
   if (business) {
     return (
       <Container
@@ -146,7 +158,9 @@ const ProductId = () => {
                 }}
               >
                 <CardBody>
-                  <CardTitle>Invest Details</CardTitle>
+                  <CardTitle>
+                    <legend>Invest Details</legend>
+                  </CardTitle>
 
                   <CardText>
                     <CardText>
@@ -168,88 +182,141 @@ const ProductId = () => {
                             type="text"
                             className="form-control"
                             id="title"
-                            placeholder="Enter title"
+                            placeholder="Enter Investment"
+                            invalid={business.minInvestment > investment}
                           />
+
+                          <FormFeedback invalid>
+                            Investment should be greater than min investment
+                            amount
+                          </FormFeedback>
                         </FormGroup>
                       </Form>
-                      <FormGroup>
+                      {/* <FormGroup> */}
+                      <div onChange={onChangeValue}>
                         <legend>Payment</legend>
                         <FormGroup check>
-                          <Input name="radio1" type="radio" />{" "}
+                          <Input
+                            type="radio"
+                            value="online"
+                            name="payment"
+                            checked={payment === "online"}
+                          />{" "}
                           <Label check>Online</Label>
                         </FormGroup>
                         <FormGroup check>
-                          <Input name="radio1" type="radio" />{" "}
+                          <Input
+                            type="radio"
+                            value="offline"
+                            name="payment"
+                            checked={payment === "offline"}
+                          />{" "}
                           <Label check>Offline</Label>
                         </FormGroup>
-                      </FormGroup>
+                      </div>
+                      {/* </FormGroup> */}
                     </CardText>
                   </CardText>
                 </CardBody>
               </Card>
-              <Card
-                style={{
-                  width: "40rem",
-                }}
-              >
-                <Form>
-                  <FormGroup check inline>
-                    <Input type="radio" />
-                    <Label check>Cash</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input type="radio" />
-                    <Label check>UPI</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input type="radio" />
-                    <Label check>Cheque</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input type="radio" />
-                    <Label check>NEFT/IMPS</Label>
-                  </FormGroup>
-                  <FormGroup className="m-t-15">
-                    <Label htmlFor="trsId">Transation Id</Label>
-                    <Input
-                      value={trsId}
-                      onChange={(e) => {
-                        setTrsId(e.target.value);
-                      }}
-                      type="text"
-                      className="form-control"
-                      id="trsId"
-                      placeholder="Enter Transation Id"
-                    />
-                  </FormGroup>
-                  <FormGroup className="m-t-15">
-                    <Label htmlFor="description">Description</Label>
-                    <Input
-                      value={description}
-                      placeholder="maximum 300 characters"
-                      maxLength={300}
-                      onChange={(e) => {
-                        setDesc(e.target.value);
-                      }}
-                      type="textarea"
-                      className="form-control"
-                      id="description"
-                      required
-                    />
-                  </FormGroup>
-                  <FormGroup className="m-t-15">
-                    <Label htmlFor="file">Upload Payment receipt</Label>
-                    <Input
-                      name="image"
-                      onChange={(e) => {
-                        setFile(e.target.files[0]);
-                      }}
-                      type="file"
-                      id="file"
-                    />
-                  </FormGroup>
-                </Form>
-              </Card>
+              {payment === "offline" ? (
+                <Card
+                  style={{
+                    width: "40rem",
+                  }}
+                >
+                  <Form>
+                    <div onChange={onChangeOfflineValue}>
+                      <FormGroup check inline>
+                        <Input
+                          type="radio"
+                          value="cash"
+                          name="offlinepayment"
+                          checked={offlinepayment === "cash"}
+                        />
+                        <Label check>Cash</Label>
+                      </FormGroup>
+                      <FormGroup check inline>
+                        <Input
+                          type="radio"
+                          value="upi"
+                          name="offlinepayment"
+                          checked={offlinepayment === "upi"}
+                        />
+                        <Label check>UPI</Label>
+                      </FormGroup>
+                      <FormGroup check inline>
+                        <Input
+                          type="radio"
+                          value="cheque"
+                          name="offlinepayment"
+                          checked={offlinepayment === "cheque"}
+                        />
+                        <Label check>Cheque</Label>
+                      </FormGroup>
+                      <FormGroup check inline>
+                        <Input
+                          type="radio"
+                          value="neftimps"
+                          name="offlinepayment"
+                          checked={offlinepayment === "neftimps"}
+                        />
+                        <Label check>NEFT/IMPS</Label>
+                      </FormGroup>
+                    </div>
+                    <FormGroup className="m-t-15">
+                      <Label htmlFor="trsId">Transation Id</Label>
+                      <Input
+                        value={trsId}
+                        onChange={(e) => {
+                          setTrsId(e.target.value);
+                        }}
+                        type="text"
+                        className="form-control"
+                        id="trsId"
+                        placeholder="Enter Transation Id"
+                        invalid={!trsId}
+                      />
+                      <FormFeedback invalid>
+                        Please enter transation Id
+                      </FormFeedback>
+                    </FormGroup>
+                    <FormGroup className="m-t-15">
+                      <Label htmlFor="description">Description</Label>
+                      <Input
+                        value={description}
+                        placeholder="maximum 300 characters"
+                        maxLength={300}
+                        onChange={(e) => {
+                          setDesc(e.target.value);
+                        }}
+                        type="textarea"
+                        className="form-control"
+                        id="description"
+                        invalid={!description}
+                      />
+                      <FormFeedback invalid>
+                        Please Enter description
+                      </FormFeedback>
+                    </FormGroup>
+                    <FormGroup className="m-t-15">
+                      <Label htmlFor="file">Upload Payment receipt</Label>
+                      <Input
+                        name="image"
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                        }}
+                        type="file"
+                        id="file"
+                      />
+                    </FormGroup>
+                  </Form>
+                </Card>
+              ) : (
+                <Alert color="warning">
+                  Online payment gateway coming soon...
+                </Alert>
+              )}
               <Button color="primary" onClick={checkout}>
                 Procced
               </Button>
