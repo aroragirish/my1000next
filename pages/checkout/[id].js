@@ -35,6 +35,9 @@ const ProductId = () => {
   const [selectedBusinessId, setSelectedBusinessId] = useState();
   const [open, setOpen] = useState("1");
   const [investment, setInvestment] = useState(0);
+  const [trsId, setTrsId] = useState();
+  const [description, setDesc] = useState("");
+  const [file, setFile] = useState();
 
   useEffect(() => {
     if (router?.query?.id) {
@@ -60,10 +63,42 @@ const ProductId = () => {
         minInvestment: business?.minInvestment,
       },
       status: "Pending",
+      trsId,
+      description,
+      image: file,
     };
-    addOrder(body).then(async (res) => {
+    const data = jsonToFormData(body);
+    addOrder(data).then(async (res) => {
       router.push("/under-review");
     });
+  };
+  const buildFormData = (formData, data, parentKey) => {
+    if (
+      data &&
+      typeof data === "object" &&
+      !(data instanceof Date) &&
+      !(data instanceof File)
+    ) {
+      Object.keys(data).forEach((key) => {
+        buildFormData(
+          formData,
+          data[key],
+          parentKey ? `${parentKey}[${key}]` : key
+        );
+      });
+    } else {
+      const value = data == null ? "" : data;
+
+      formData.append(parentKey, value);
+    }
+  };
+
+  const jsonToFormData = (data) => {
+    const formData = new FormData();
+
+    buildFormData(formData, data);
+
+    return formData;
   };
 
   if (business) {
@@ -150,11 +185,74 @@ const ProductId = () => {
                       </FormGroup>
                     </CardText>
                   </CardText>
-                  <Button color="primary" onClick={checkout}>
-                    Procced
-                  </Button>
                 </CardBody>
               </Card>
+              <Card
+                style={{
+                  width: "40rem",
+                }}
+              >
+                <Form>
+                  <FormGroup check inline>
+                    <Input type="radio" />
+                    <Label check>Cash</Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input type="radio" />
+                    <Label check>UPI</Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input type="radio" />
+                    <Label check>Cheque</Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input type="radio" />
+                    <Label check>NEFT/IMPS</Label>
+                  </FormGroup>
+                  <FormGroup className="m-t-15">
+                    <Label htmlFor="trsId">Transation Id</Label>
+                    <Input
+                      value={trsId}
+                      onChange={(e) => {
+                        setTrsId(e.target.value);
+                      }}
+                      type="text"
+                      className="form-control"
+                      id="trsId"
+                      placeholder="Enter Transation Id"
+                    />
+                  </FormGroup>
+                  <FormGroup className="m-t-15">
+                    <Label htmlFor="description">Description</Label>
+                    <Input
+                      value={description}
+                      placeholder="maximum 300 characters"
+                      maxLength={300}
+                      onChange={(e) => {
+                        setDesc(e.target.value);
+                      }}
+                      type="textarea"
+                      className="form-control"
+                      id="description"
+                      required
+                    />
+                  </FormGroup>
+                  <FormGroup className="m-t-15">
+                    <Label htmlFor="file">Upload Payment receipt</Label>
+                    <Input
+                      name="image"
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                      type="file"
+                      id="file"
+                    />
+                  </FormGroup>
+                </Form>
+              </Card>
+              <Button color="primary" onClick={checkout}>
+                Procced
+              </Button>
             </div>
           </Col>
         </Row>
