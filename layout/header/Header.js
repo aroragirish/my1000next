@@ -118,9 +118,16 @@ const Header = () => {
                       className="btn btn-info text-light"
                       caret
                     >
-                    <strong>  {user.name}</strong>
+                      <strong> {user.name}</strong>
                     </DropdownToggle>
                     <DropdownMenu>
+                      {user?.role === "investor" && (
+                        <DropdownItem>
+                          <Link href="/my-orders" passHref>
+                            <a className="text-black"> My Orders</a>
+                          </Link>
+                        </DropdownItem>
+                      )}
                       <DropdownItem tag="a" onClick={logout}>
                         Logout
                       </DropdownItem>
@@ -150,7 +157,7 @@ const Header = () => {
                 <div className="act-buttons font-weight-bold">
                   <Link href="/get-started" passHref>
                     <NavLink className="btn btn-success text-black font-weight-bold">
-                    <strong> Login/Register </strong>
+                      <strong> Login/Register </strong>
                     </NavLink>
                   </Link>
                 </div>
