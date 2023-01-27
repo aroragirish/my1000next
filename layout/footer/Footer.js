@@ -5,30 +5,30 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="footer4 b-t spacer bg-dark">
+    <div className="footer4 b-t spacer bg-light">
       <Container>
-        <Row className="text-white">
+        <Row className="text-dark">
           <Col lg="3" md="6" className="m-b-30">
-            <h5 className="text-white m-b-20 semi-bold">Address</h5>
+            <h5 className="text-dark m-b-20 semi-bold">Address</h5>
             <p>Office No. 327, Hirabaug Business Center, Swargate, Pune. 411002</p>
           </Col>
           <Col lg="3" md="6" className="m-b-30">
             
           </Col>
           <Col lg="3" md="6" className="m-b-30">
-            <h5 className="text-white m-b-20">Email</h5>
+            <h5 className="text-dark m-b-20">Email</h5>
             <p>
               <Link href="#">
-                <a className="link text-white">Email: info@mytt.in</a>
+                <a className="link text-dark">Email: info@mytt.in</a>
               </Link>
               <br />
               <Link href="https://my1000.biz/">
-                <a className="link text-white">Site: my1000.biz</a>
+                <a className="link text-dark">Site: my1000.biz</a>
               </Link>
             </p>
           </Col>
           <Col lg="3" md="6">
-            <h5 className="text-white m-b-20">Social</h5>
+            <h5 className="text-dark m-b-20">Social</h5>
             <div className="round-social light">
               <Link href="https://www.facebook.com/myttindia">
                 <a className="link">
@@ -52,10 +52,10 @@ const Footer = () => {
           <Row>
             <Col md="12">
               <div className="d-flex font-14">
-                <div className="m-t-10 m-b-10 copyright text-white">
+                <div className="m-t-10 m-b-10 copyright text-dark">
                   All Rights Reserved by{" "}
                   <Link href="https://my1000.biz/">
-                    <a className="link text-white">my1000.biz</a>
+                    <a className="link text-dark">my1000.biz</a>
                   </Link>
                 </div>
                 <div className="links ml-auto m-t-10 m-b-10">

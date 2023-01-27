@@ -25,7 +25,7 @@ const BannerComponent = () => {
                 data-toggle="collapse"
                 href="/get-started"
               >
-                <span className="btn btn-success mt-3 text-dark">Start Now</span>
+                <span className="btn btn-info mt-3 text-light">Start Now</span>
               </Link>
             </Col>
             <Col md="6" className="text-center">

@@ -18,7 +18,7 @@ const dashboard = () => {
   return (
     <div className="mt-5">
       <div className="blog-home2">
-        {businesses.length && (
+        {businesses.length === 0 && (
           <Container>
             <Row
               style={{
@@ -34,7 +34,7 @@ const dashboard = () => {
                 </h6>
               </Col>
               <Col md="3" className="text-right">
-                <FormGroup className="m-t-15">
+                <FormGroup className="m-t-15 float-end">
                   <Link
                     href="/product"
                     class="text-primary"

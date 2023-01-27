@@ -37,7 +37,7 @@ const Header = () => {
     });
   };
   return (
-    <div className="topbar fixed-top bg-dark" id="top">
+    <div className="topbar fixed-top bg-light" id="top">
       <div className="header6">
         <Container className="po-relative">
           <Navbar className="navbar-expand-lg  h6-nav-bar">
@@ -60,8 +60,8 @@ const Header = () => {
                       <a
                         className={
                           router.pathname == "/dashboard"
-                            ? "text-success nav-link"
-                            : "nav-link"
+                            ? "text-info nav-link"
+                            : "nav-link text-dark"
                         }
                       >
                         Dashboard
@@ -75,8 +75,8 @@ const Header = () => {
                     <a
                       className={
                         router.pathname == "/product"
-                          ? "text-success nav-link"
-                          : "nav-link"
+                          ? "text-info nav-link"
+                          : "nav-link text-dark"
                       }
                     >
                       Businesses
@@ -88,8 +88,8 @@ const Header = () => {
                     <a
                       className={
                         router.pathname == "/about"
-                          ? "text-success nav-link"
-                          : "nav-link"
+                          ? "text-info nav-link"
+                          : "nav-link text-dark"
                       }
                     >
                       About
@@ -101,8 +101,8 @@ const Header = () => {
                     <a
                       className={
                         router.pathname == "/how-it-works"
-                          ? "text-success nav-link"
-                          : "nav-link"
+                          ? "text-info nav-link"
+                          : "nav-link text-dark"
                       }
                     >
                       How it works
@@ -115,7 +115,7 @@ const Header = () => {
                   <UncontrolledDropdown setActiveFromChild>
                     <DropdownToggle
                       tag="button"
-                      className="btn btn-success text-black"
+                      className="btn btn-info text-light"
                       caret
                     >
                     <strong>  {user.name}</strong>
