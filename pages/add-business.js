@@ -41,7 +41,7 @@ const AddBusiness = () => {
 
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
-    const [firmType, setFirmType] = useState('pvtltd');
+    const [firmType, setFirmType] = useState('Private Limited / Limited');
     const [employees, setEmployees] = useState();
 
     const [extraInfo, setValue] = useState('');
@@ -220,9 +220,9 @@ const AddBusiness = () => {
                                                     <Label for="firmType">Entity type</Label>
                                                     <Input value={firmType} onChange={(e) => setFirmType(e.target.value)} style={{
                                                     }} className='form-control' type='select' name="firmType" id="firmType">
-                                                        <option value="pvtltd">Private Limited / Limited</option>;
-                                                        <option value="partnership">Partnership Firm</option>;
-                                                        <option value="proprietor">Proprietorship</option>;
+                                                        <option value="Private Limited / Limited">Private Limited / Limited</option>;
+                                                        <option value="Partnership Firm">Partnership Firm</option>;
+                                                        <option value="Proprietorship">Proprietorship</option>;
 
                                                     </Input >
                                                 </FormGroup>
@@ -279,8 +279,8 @@ const AddBusiness = () => {
                                                                 Required documents
                                                             </PopoverHeader>
                                                             <PopoverBody>
-                                                              {firmType === 'pvtltd' ? 'All Directors KYC, Company Registration Certificate (COI), AOA, MOA, GST Cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance. ' : (
-                                                                firmType === 'partnership' ? 'Partnership Deed, All partners KYC, GST cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance.' :
+                                                              {firmType === 'Private Limited / Limited' ? 'All Directors KYC, Company Registration Certificate (COI), AOA, MOA, GST Cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance. ' : (
+                                                                firmType === 'Partnership Firm' ? 'Partnership Deed, All partners KYC, GST cert, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance.' :
                                                                 'Owner KYC, Shop act, MSME cert, Udyog adhar, Board Resolution for authorized Signatory, Repayment Plan, Inventory Report, Previous All Compliance'
                                                               )}
                                                             </PopoverBody>
