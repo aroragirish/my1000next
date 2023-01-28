@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getBusinessById } from "../../services/businessService";
 import { addOrder } from "../../services/orderService";
 import router from "next/router";
 import {
@@ -20,14 +19,7 @@ import {
   Alert,
   FormFeedback,
 } from "reactstrap";
-import parse from "html-react-parser";
-import Image from "next/image";
-import googleDocs from "../../assets/images/logos/google-docs.png";
 import { useSelector, useDispatch } from "react-redux";
-
-function truncate(str, n) {
-  return str.length > n ? str.slice(0, n - 1) + "..." : str;
-}
 
 const ProductId = () => {
   const { checkedOutOrder } = useSelector((state) => state.order);

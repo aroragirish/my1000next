@@ -21,13 +21,10 @@ import img4 from "../assets/search.png";
 
 import img5 from "../assets/images/portfolio/kyc.png";
 import Image from "next/image";
-function truncate(str, n) {
-  return str.length > n ? str.slice(0, n - 1) + "..." : str;
-}
 
 const UnderReview = () => {
   return (
-    <div className="container mt-5 text-center">
+    <div className="container mt-5 pt-5 text-center">
       <div className="row">
         <div className="col-md-12">
           <div className="card-shadow card card-body">

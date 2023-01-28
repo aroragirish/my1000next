@@ -2,12 +2,6 @@
 import React from "react";
 import { Row, Col, Container, Card, CardBody } from "reactstrap";
 import Image from "next/image";
-import img1 from "../../../assets/images/portfolio/img1.jpg";
-import img2 from "../../../assets/images/portfolio/img2.jpg";
-import img3 from "../../../assets/images/portfolio/img3.jpg";
-import img4 from "../../../assets/images/portfolio/img4.jpg";
-import img5 from "../../../assets/images/portfolio/img5.jpg";
-import img6 from "../../../assets/images/portfolio/img6.jpg";
 import landing from "../../../assets/growth-analysis.gif";
 import Link from "next/link";
 
@@ -18,9 +12,6 @@ const PortfolioComponent = () => {
         <Container>
           <Row className="">
             <Col md="6" className="align-self-center ">
-              <span className="label label-rounded label-inverse">
-                Creating Brands
-              </span>
               <h1 className="title">Grow your wealth with higher returns</h1>
               <h6 className="subtitle op-8">
                 Your platform for exclusive investment opportunities
@@ -31,7 +22,7 @@ const PortfolioComponent = () => {
                 href="/get-started"
               >
                 <span className="btn btn-info mt-3 text-light">
-                  Get Started
+                 <strong> Get Started</strong>
                 </span>
               </Link>
             </Col>

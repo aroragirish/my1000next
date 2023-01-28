@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
@@ -28,6 +28,11 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const toggle = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 500);
+  }, [router.asPath])
   const logout = () => {
     logoutApi({ refreshToken: tokens.refresh.token }).then((res) => {
       dispatch({
@@ -45,7 +50,7 @@ const Header = () => {
               <Image height={70} width={125} src={logo} alt="wrapkit" />
             </NavbarBrand>
             <NavbarToggler onClick={toggle}>
-              <span className="ti-menu"></span>
+              <span className="ti-menu text-info"></span>
             </NavbarToggler>
             <Collapse
               isOpen={isOpen}
@@ -92,20 +97,7 @@ const Header = () => {
                           : "nav-link text-dark"
                       }
                     >
-                      About
-                    </a>
-                  </Link>
-                </NavItem>
-                <NavItem className="font-weight-bold">
-                  <Link href="/how-it-works">
-                    <a
-                      className={
-                        router.pathname == "/how-it-works"
-                          ? "text-info nav-link"
-                          : "nav-link text-dark"
-                      }
-                    >
-                      How it works
+                      About Us
                     </a>
                   </Link>
                 </NavItem>

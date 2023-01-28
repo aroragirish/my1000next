@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import moment from 'moment';
 import {
   getBusinessById,
   approveBusiness,
@@ -26,10 +27,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import googleDocs from "../../assets/images/logos/google-docs.png";
 import { useSelector, useDispatch } from "react-redux";
-
-function truncate(str, n) {
-  return str.length > n ? str.slice(0, n - 1) + "..." : str;
-}
+import { truncate } from "../../utils";
 
 const ProductId = () => {
   const [business, setBusiness] = useState();
@@ -68,7 +66,7 @@ const ProductId = () => {
         style={{
           marginBottom: "100px",
         }}
-        className="mt-5"
+        className="mt-5 pt-5"
       >
         <Row>
           <Col lg={9}>
@@ -190,7 +188,7 @@ const ProductId = () => {
                         <strong>Incorporation Date</strong>
                       </Col>
                       <Col lg={8}>
-                        {business?.aboutCompany?.incorporationDate}
+                        {moment(business?.aboutCompany?.incorporationDate).format('MMMM Do YYYY')}
                       </Col>
                     </Row>
                     <Row>

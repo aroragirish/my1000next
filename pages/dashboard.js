@@ -6,6 +6,7 @@ import img4 from "../assets/images/portfolio/laptop.png";
 import img5 from "../assets/images/portfolio/kyc.png";
 import { getAllBusinesses } from "../services/businessService";
 import Link from "next/link";
+import { truncate } from "../utils";
 
 const dashboard = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -16,7 +17,7 @@ const dashboard = () => {
     });
   }, []);
   return (
-    <div className="mt-5">
+    <div className="mt-5 pt-5">
       <div className="blog-home2">
         {businesses.length !== 0 && (
           <Container>
@@ -96,12 +97,14 @@ const dashboard = () => {
                               }}
                               className="m-t-20"
                             >
-                              {business.description}
+                              {truncate(business.description, 100)}
                             </p>
                             <hr />
                             <Row>
                               <Col lg={4}>
-                                <div>
+                                <div style={{
+                                  fontSize: "14px",
+                                }}>
                                   <strong>
                                     {" "}
                                     ₹{" "}
@@ -120,7 +123,9 @@ const dashboard = () => {
                                 </div>
                               </Col>
                               <Col lg={4}>
-                                <div>
+                                <div style={{
+                                  fontSize: "14px",
+                                }}>
                                   <strong>
                                     {" "}
                                     {business.category

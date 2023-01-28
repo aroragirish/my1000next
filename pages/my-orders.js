@@ -34,7 +34,7 @@ const YourOrders = () => {
         margin: "15%",
         marginBottom: "100px",
       }}
-      className="mt-5"
+      className="mt-5 pt-5"
     >
       {!orders.length ? (
         <h1

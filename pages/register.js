@@ -62,7 +62,7 @@ const register = () => {
     }
 
     return (
-        <div className="contact1 bg-dark">
+        <div className="contact1 bg-dark pt-5">
             <Row>
                 <Container>
                     <div className="spacer">

@@ -126,7 +126,6 @@ form-banner 1
 
 #banner1 {
   background: right -3em center no-repeat #e9f3f8;
-  background-image: $form-banner;
   h2 {
     font-size: 48px;
     line-height: 1;
@@ -340,57 +339,6 @@ Pricing 8
 /*******************
 team 2
 *******************/
-.team2 {
-  .pro-pic {
-    min-height: 200px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    &.t1 {
-      background-image: $t1;
-    }
-    &.t2 {
-      background-image: $t2;
-    }
-    &.t3 {
-      background-image: $t3;
-    }
-    &.t4 {
-      background-image: $t4;
-    }
-    .card-img-overlay {
-      background: rgba(26, 139, 243, 0.87);
-      display: none;
-
-      ul {
-        position: relative;
-        top: 50%;
-        text-align: center;
-        li a {
-          color: $white;
-          padding: 0 10px;
-          transition: 0.1s ease-in;
-          display: block;
-          &:hover {
-            transform: translate3d(0px, -5px, 0px);
-          }
-        }
-      }
-    }
-    &:hover {
-      .card-img-overlay {
-        display: block;
-      }
-    }
-  }
-  .title {
-    margin: 30px 0 0 0;
-  }
-  .subtitle {
-    margin: 0 0 20px 0;
-    font-size: 13px;
-  }
-}
 
 /*******************
 Testimonial 3

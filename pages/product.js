@@ -17,6 +17,7 @@ import {
 } from "../services/businessService";
 import { getAllCategories } from "../services/categoryService";
 import Link from "next/link";
+import { truncate } from "../utils";
 
 const Products = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -55,16 +56,10 @@ const Products = () => {
             {/* <Col lg="6" md="6" className="align-self-center">
                             <Image src={img3} alt="img" className="img-responsive img-rounded"  />
                         </Col> */}
-            <Col lg="6" md="6" className="align-self-center">
-              <h4 className="subtitle font-light">Products</h4>
-              <h1 className="title mb-5">
-                We love to make great things, things that matter.{" "}
-              </h1>
-              <h4 className="subtitle font-light">
-                Funding h andshake buyer business-to-business metrics iPad
-                partnership. First mover advantage innovator success deployment
-                non-disclosure.{" "}
-              </h4>
+            <Col lg="9" md="9" className="align-self-center">
+              <h4 className="subtitle font-light">Businesses</h4>
+              <h1 className="title mb-2">
+              Access investment opportunities that were once available only to the wealthy.<br /><br /> Join Our Platform, Register Today.              </h1>
             </Col>
           </Row>
         </Container>
@@ -148,12 +143,14 @@ const Products = () => {
                             }}
                             className="m-t-20"
                           >
-                            {business.description}
+                            {truncate(business.description, 100)}
                           </p>
                           <hr />
                           <Row>
                             <Col lg={4}>
-                              <div>
+                              <div style={{
+                                  fontSize: "14px",
+                                }}>
                                 <strong>
                                   {" "}
                                   ₹{" "}
@@ -172,7 +169,9 @@ const Products = () => {
                               </div>
                             </Col>
                             <Col lg={4}>
-                              <div>
+                              <div style={{
+                                  fontSize: "14px",
+                                }}>
                                 <strong>
                                   {" "}
                                   {business.category

@@ -98,7 +98,7 @@ const FormBannerComponent = () => {
           </Row>
         </Container>
       </div> */}
-      <div className="bg-dark">
+      <div className="bg-dark pt-5">
 
         <section>
           <div id="banner1" className="banner spacer">
