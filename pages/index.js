@@ -1,16 +1,15 @@
-import Head from "next/head";
-import HowItWorks from "../components/custom/HowItWorks";
+import dynamic from 'next/dynamic'
 import FaqComponent from "../components/custom/sections/faqcomponent";
 import PortfolioComponent from "../components/custom/sections/portfoliocomponent";
+
+const HowItWorks = dynamic(() => import('../components/custom/HowItWorks'), {
+  loading: () => 'Loading...',
+})
 
 export default function Home() {
   return (
     <div>
-      <Head>
-        <title>My1000+ | Invest in hig returns</title>
-        <meta name="description" content="My1000+ | Invest in hig returns" />
-        <link rel="icon" href="/logo.jpg" />
-      </Head>
+
       <PortfolioComponent />
       <HowItWorks />
       <FaqComponent />
