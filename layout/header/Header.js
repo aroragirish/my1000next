@@ -156,7 +156,7 @@ const Header = () => {
               ) : (
                 <div className="act-buttons font-weight-bold">
                   <Link href="/get-started" passHref>
-                    <NavLink className="btn btn-success text-black font-weight-bold">
+                    <NavLink className="btn btn-info font-weight-bold">
                       <strong> Login/Register </strong>
                     </NavLink>
                   </Link>

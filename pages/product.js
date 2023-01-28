@@ -86,7 +86,7 @@ const Products = () => {
                       onChange={(e) => setCategory(e.target.value)}
                       style={{
                         height: "-webkit-calc(1.5em + 0.75rem + 2px)",
-                        padding: 0,
+                        padding: "8px",
                       }}
                       className="form-control"
                       type="select"
@@ -114,6 +114,7 @@ const Products = () => {
                           style={{
                             padding: "10px",
                             boxShadow: "2px 2px 2px 2px lightgrey",
+                            borderRadius: "20px",
                           }}
                         >
                           <Link

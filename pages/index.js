@@ -7,14 +7,11 @@ export default function Home() {
     <div>
       <Head>
         <title>My1000+ | Invest in hig returns</title>
-        <meta
-          name="description"
-          content="My1000+ | Invest in hig returns"
-        />
+        <meta name="description" content="My1000+ | Invest in hig returns" />
         <link rel="icon" href="/logo.jpg" />
       </Head>
       <PortfolioComponent />
-      <BannerComponent />
+      {/* <BannerComponent /> */}
     </div>
   );
 }

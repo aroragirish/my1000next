@@ -56,11 +56,11 @@ const ProductId = () => {
   };
   const checkoutProduct = () => {
     dispatch({
-      type: 'ADD_PENDING_ORDER',
-      payload: business
+      type: "ADD_PENDING_ORDER",
+      payload: business,
     });
-    router.push('/checkout');
-  }
+    router.push("/checkout");
+  };
 
   if (business) {
     return (
@@ -99,7 +99,7 @@ const ProductId = () => {
             >
               <strong
                 style={{
-                  fontSize: "21px",
+                  fontSize: "20px",
                 }}
               >
                 Tags:
@@ -110,7 +110,7 @@ const ProductId = () => {
                     style={{
                       display: "inline",
                       margin: "5px",
-                      fontSize: "21px",
+                      fontSize: "20px",
                     }}
                     key={tag}
                   >
@@ -127,10 +127,16 @@ const ProductId = () => {
                 fontSize: "20px",
               }}
             >
-              <Accordion open={open} toggle={toggle}>
+              <Accordion flush open={open} toggle={toggle}>
                 <AccordionItem>
                   <AccordionHeader targetId="1">
-                    <h4>Description</h4>
+                    <h5
+                      style={{
+                        fontWeight: "600",
+                      }}
+                    >
+                      Description
+                    </h5>
                   </AccordionHeader>
                   <AccordionBody accordionId="1">
                     <p>{business.description}</p>
@@ -138,7 +144,13 @@ const ProductId = () => {
                 </AccordionItem>
                 <AccordionItem>
                   <AccordionHeader targetId="2">
-                    <h4>More Info</h4>
+                    <h5
+                      style={{
+                        fontWeight: "600",
+                      }}
+                    >
+                      More Info
+                    </h5>
                   </AccordionHeader>
                   <AccordionBody accordionId="2">
                     {parse(business.extraInfo)}
@@ -146,7 +158,13 @@ const ProductId = () => {
                 </AccordionItem>
                 <AccordionItem>
                   <AccordionHeader targetId="3">
-                    <h4>About Us</h4>
+                    <h5
+                      style={{
+                        fontWeight: "600",
+                      }}
+                    >
+                      About Us
+                    </h5>
                   </AccordionHeader>
                   <AccordionBody accordionId="3">
                     <Row>

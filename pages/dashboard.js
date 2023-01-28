@@ -62,6 +62,7 @@ const dashboard = () => {
                             style={{
                               padding: "10px",
                               boxShadow: "2px 2px 2px 2px lightgrey",
+                              borderRadius: "20px",
                             }}
                           >
                             <Link

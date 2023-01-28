@@ -8,114 +8,43 @@ import img3 from "../../../assets/images/portfolio/img3.jpg";
 import img4 from "../../../assets/images/portfolio/img4.jpg";
 import img5 from "../../../assets/images/portfolio/img5.jpg";
 import img6 from "../../../assets/images/portfolio/img6.jpg";
+import landing from "../../../assets/growth-analysis.gif";
+import Link from "next/link";
 
 const PortfolioComponent = () => {
   return (
     <div>
-      <div className="spacer">
+      <div className="static-slider-head banner2 bg-dark ">
         <Container>
-          <Row className="justify-content-center">
-            <Col md="12" className="text-center">
-            <p className="text-center text-gray fs-1 display-7">Our Seller</p>
-              <h2 className="title display-4">Value proposition accelerator product management venture</h2>
+          <Row className="">
+            <Col md="6" className="align-self-center ">
+              <span className="label label-rounded label-inverse">
+                Creating Brands
+              </span>
+              <h1 className="title">Grow your wealth with higher returns</h1>
+              <h6 className="subtitle op-8">
+                Your platform for exclusive investment opportunities
+              </h6>
+              <Link
+                className="btn btn-light btn-rounded btn-md m-t-20"
+                data-toggle="collapse"
+                href="/get-started"
+              >
+                <span className="btn btn-info mt-3 text-light">
+                  Get Started
+                </span>
+              </Link>
             </Col>
-          </Row>
-          <Row className="m-t-40">
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img1}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">
-                    Branding for Theme Designer
-                  </h5>
-                  <p className="m-b-0 font-14">Digital Marketing</p>
-                </CardBody>
-              </Card>
+            <Col md="6" className="text-center">
+              <Image
+                src={landing}
+                alt=""
+                title=""
+                width="100%"
+                height="75%"
+                layout="responsive"
+              />
             </Col>
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img2}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">Button Designs Free</h5>
-                  <p className="m-b-0 font-14">Search Engine</p>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img3}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">Branding & Co Agency</h5>
-                  <p className="m-b-0 font-14">Admin templates</p>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img4}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">Zukandre Phoniex</h5>
-                  <p className="m-b-0 font-14">Branding</p>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img5}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">Sionage Mokcup</h5>
-                  <p className="m-b-0 font-14">Wll Mockup</p>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-shadow">
-                <a href="#" className="img-ho">
-                  <Image
-                    className="card-img-top"
-                    src={img6}
-                    alt="wrappixel kit"
-                  />
-                </a>
-                <CardBody>
-                  <h5 className="font-medium m-b-0">Hard Cover Book Mock</h5>
-                  <p className="m-b-0 font-14">Book Covers</p>
-                </CardBody>
-              </Card>
-            </Col>
-            <div className="text-center mt-5 w-100">
-              <a href="product"><button className="btn btn-outline-dark text-muted">Load More</button></a>
-            </div>
           </Row>
         </Container>
       </div>
