@@ -14,7 +14,9 @@ const dashboard = () => {
   useEffect(() => {
     getAllBusinesses().then((res) => {
       setBusinesses(res.data);
-    });
+    }).catch(() => {
+      router.push('/error');
+  })
   }, []);
   return (
     <div className="mt-5 pt-5">

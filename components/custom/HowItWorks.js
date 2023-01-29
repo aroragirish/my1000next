@@ -23,7 +23,7 @@ const steps = [
     {
         label: 'Complete KYC and Add Bank details',
         description:
-            'Complete your Know Your Customer (KYC) process by providing your AADHAR card or PAN (Permanent Account Number) and add your bank account details. ',
+            'Complete your Know Your Customer (KYC) process by providing your AADHAR card or PAN (Permanent Account Number). You also need to add your account details in order to receive payout amount into your account. Reach out to us on our email ID if you face any difficulties or for any queries',
     },
     {
         label: 'Add your own business listing',        

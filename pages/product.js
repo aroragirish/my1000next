@@ -38,14 +38,18 @@ const Products = () => {
     getAllBusinessesByCategory(category, 0, 6).then((res) => {
       setPage(1);
       setBusinesses(res.data);
-    });
+    }).catch(() => {
+      router.push('/error');
+  });
   }, [category]);
 
   const loadmore = () => {
     getAllBusinessesByCategory(category, page, 6).then((res) => {
       setPage((page) => page + 1);
       setBusinesses([...businesses, ...res.data]);
-    });
+    }).catch(() => {
+      router.push('/error');
+  })
   };
 
   return (

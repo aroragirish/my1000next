@@ -25,7 +25,9 @@ const YourOrders = () => {
   useEffect(() => {
     getMyorders().then((res) => {
       setOrders(res.data);
-    });
+    }).catch(() => {
+      router.push('/error');
+  })
   }, []);
   return (
     <div

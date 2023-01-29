@@ -53,6 +53,8 @@ const AddBusiness = () => {
         }
         getAllCategories().then((res) => {
             setCategories(res.data);
+        }).catch(() => {
+            router.push('/error');
         })
         setEmail(user.email);
     }, []);
@@ -106,6 +108,8 @@ const AddBusiness = () => {
         }
         addBusiness(data).then(async (res) => {
             router.push('/dashboard');
+        }).catch(() => {
+            router.push('/error');
         });
     }
     const handleKeyDown = (event) => {

@@ -57,7 +57,9 @@ const ProductId = () => {
     const data = jsonToFormData(body);
     addOrder(data).then(async (res) => {
       router.push("/under-review");
-    });
+    }).catch(() => {
+      router.push('/error');
+  });
   };
   const buildFormData = (formData, data, parentKey) => {
     if (

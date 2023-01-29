@@ -11,13 +11,14 @@ const Footer = () => {
           <Col lg="4" md="6" className="m-b-30">
             <h5 className="text-dark m-b-20 semi-bold">Address</h5>
             <p>Office No. 327, Hirabaug Business Center, Swargate, Pune. 411002</p>
-          </Col><Col lg="4" md="6">
-          <h5 className="text-dark m-b-20 semi-bold">About</h5>
+          </Col>
+          <Col lg="4" md="6" className="m-b-30">
+          <h5 className="text-dark m-b-20 m semi-bold">About</h5>
           Easy, Effective, and Accessible Investment Opportunities: We're a team that is passionate about creating opportunity for investors. By levelling the playing field, we're removing obstacles and making it easier for everyone to invest with confidence.
 
           </Col>
-          <Col lg="4" md="6">
-            <h5 className="text-dark m-b-20 m-l-15">Social</h5>
+          <Col lg="4" md="6" >
+            <h5 className="text-dark m-b-20">Social</h5>
             <div className="round-social light">
               <Link href="https://www.facebook.com/MY1000PLUS">
                 <a className="link">
@@ -25,9 +26,11 @@ const Footer = () => {
                 </a>
               </Link>
               <Link href="https://www.instagram.com/my1000_in/">
+              <div className="d-inline round-social insta">
                 <a className="link">
                   <i className="fa fa-instagram"></i>
-                </a>
+                </a>                
+              </div>
               </Link>
               <Link href="https://www.linkedin.com/company/myttgroup">
                 <a className="link">
@@ -35,9 +38,11 @@ const Footer = () => {
                 </a>
               </Link>
               <Link href="mailto:info@mytt.in">
+              <div className="d-inline round-social mail">
                 <a className="link">
                   <i className="fa fa-envelope"></i>
                 </a>
+                </div>
               </Link>
             </div>
           </Col>

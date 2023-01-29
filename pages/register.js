@@ -58,7 +58,9 @@ const register = () => {
         registerApi(body).then(async (res) => {
             await saveUser(res);
             router.push('/dashboard');
-        });
+        }).catch(() => {
+            router.push('/error');
+        })
     }
 
     return (

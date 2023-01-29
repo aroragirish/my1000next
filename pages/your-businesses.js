@@ -28,7 +28,9 @@ const YourBusinesses = () => {
   useEffect(() => {
     getBusinessesByUser().then((res) => {
       setBusinesses(res.data);
-    });
+    }).catch(() => {
+      router.push('/error');
+  })
   }, []);
   return (
     <div
@@ -118,7 +120,9 @@ const YourBusinesses = () => {
                   setBusinesses(res.data);
                   toggle();
                 });
-              });
+              }).catch(() => {
+                router.push('/error');
+            });
             }}
             color="danger"
           >

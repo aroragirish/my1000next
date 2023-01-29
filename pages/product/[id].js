@@ -42,7 +42,9 @@ const ProductId = () => {
       getBusinessById(router.query.id).then((res) => {
         console.log(res.data);
         setBusiness(res.data);
-      });
+      }).catch(() => {
+        router.push('/error');
+    })
     }
   }, []);
   const toggle = (id) => {
@@ -368,7 +370,9 @@ const ProductId = () => {
                 deleteBusiness(selectedBusinessId).then((res) => {
                   router.push("/your-businesses");
                   setDeleteModal((val) => !val);
-                });
+                }).catch(() => {
+                  router.push('/error');
+              })
               }}
               color="danger"
             >
@@ -401,7 +405,9 @@ const ProductId = () => {
                 approveBusiness(selectedBusinessId).then((res) => {
                   router.push("/your-businesses");
                   setApproveModal((val) => !val);
-                });
+                }).catch(() => {
+                  router.push('/error');
+              })
               }}
               color="info"
             >

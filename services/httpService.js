@@ -57,13 +57,16 @@ const baseService = (options) => {
   const onError = (error) => {
     const loader = document.getElementById('spinner');
     const mainWrapper = document.getElementById('main-wrapper');
-  
+    if (error.code === "ERR_NETWORK") {
+      router.push('/error');
+    }
     mainWrapper.classList.remove('less-opaque');
     loader.classList.remove('lds-hourglass');
     if (error?.response?.status === 401) {
       router.push('/dashboard')
+    } else if (error?.response?.status >= 400 && error?.response?.status < 500) {
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
   };
 
   return client(newOptions).then(onSuccess).catch(onError);
