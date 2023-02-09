@@ -40,12 +40,12 @@ export const getMyorders = (data) => {
 //   });
 // };
 
-// export const deleteBusiness = (id) => {
-//   return baseService({
-//     url: `/v1/business/delete/${id}`,
-//     method: "DELETE",
-//   });
-// };
+export const cancelOrderById = (id) => {
+  return baseService({
+    url: `/v1/orders/delete/${id}`,
+    method: "DELETE",
+  });
+};
 
 // export const approveBusiness = (id) => {
 //   return baseService({

@@ -19,14 +19,15 @@ import {
   Alert,
   FormFeedback,
 } from "reactstrap";
+import Image from 'next/image';
 import { useSelector, useDispatch } from "react-redux";
 
 const ProductId = () => {
   const { checkedOutOrder } = useSelector((state) => state.order);
   const [business] = useState(checkedOutOrder);
   const [investment, setInvestment] = useState();
-  const [trsId, setTrsId] = useState("xxx1234xxx");
-  const [description, setDesc] = useState("Provide details ......");
+  const [trsId, setTrsId] = useState("");
+  const [description, setDesc] = useState("");
   const [file, setFile] = useState();
   const [payment, setPayment] = useState("offline");
   const [offlinepayment, setofflinePayment] = useState("upi");
@@ -41,22 +42,25 @@ const ProductId = () => {
         })
     }
   }, []);
-  const checkout = () => {
+  const checkout = (e) => {
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
     console.log(investment);
     const body = {
       business: {
         businessId: business?._id,
         amountInvested: investment,
         minInvestment: business?.minInvestment,
+        category: business.category,
+        title: business.title
       },
-      status: "Pending",
       trsId,
       description,
       image: file,
     };
     const data = jsonToFormData(body);
     addOrder(data).then(async (res) => {
-      router.push("/under-review");
+      router.push("/my-orders");
     }).catch(() => {
       router.push('/error');
   });
@@ -91,19 +95,17 @@ const ProductId = () => {
   };
   const onChangeValue = (event) => {
     setPayment(event.target.value);
-    console.log(event.target.value);
   };
   const onChangeOfflineValue = (event) => {
     setofflinePayment(event.target.value);
-    console.log(event.target.value);
   };
   if (business) {
     return (
       <Container
         style={{
           marginBottom: "100px",
+          marginTop: "100px"
         }}
-        className="mt-5"
       >
         <Row>
           <Col lg={7}>
@@ -114,7 +116,11 @@ const ProductId = () => {
                   width: "40rem",
                 }}
               >
-                <img alt="Sample" src={business.image} />
+                <Image 
+                  title=""
+                  width="100%"
+                  height="75%"
+                  layout="responsive" alt="Sample" src={business.image} />
                 <CardBody>
                   <CardTitle tag="h5">{business.title}</CardTitle>
                   <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -203,13 +209,29 @@ const ProductId = () => {
                   </CardText>
                 </CardBody>
               </Card>
+              {payment === "offline" && (
+              <Card style={{
+                width: "40rem",
+              }} inverse color="info">
+                <CardBody>
+                  <p><strong>Bank: </strong>ICICI Bank</p>
+                  <p><strong>Branch Name: </strong>Bund Garden Pune</p>
+                  <p><strong>Account Number: </strong>000505034152</p>
+                  <p><strong>IFSC: </strong>ICIC0000005</p>
+                  <p><strong>Account Holder Name: </strong>MYTHINK TANK MULTIMEDIA PVT LTD</p>
+
+                </CardBody>
+              </Card>
+              )}
               {payment === "offline" ? (
                 <Card
                   style={{
                     width: "40rem",
                   }}
                 >
-                  <Form>
+                  
+              <hr />
+                  <Form onSubmit={checkout}>
                     <div onChange={onChangeOfflineValue}>
                       <FormGroup check inline>
                         <Input
@@ -259,11 +281,8 @@ const ProductId = () => {
                         className="form-control"
                         id="trsId"
                         placeholder="Enter Transation Id"
-                        invalid={!trsId}
+                        required
                       />
-                      <FormFeedback invalid>
-                        Please enter transation Id
-                      </FormFeedback>
                     </FormGroup>
                     <FormGroup className="m-t-15">
                       <Label htmlFor="description">Description</Label>
@@ -277,11 +296,8 @@ const ProductId = () => {
                         type="textarea"
                         className="form-control"
                         id="description"
-                        invalid={!description}
+                        required
                       />
-                      <FormFeedback invalid>
-                        Please Enter description
-                      </FormFeedback>
                     </FormGroup>
                     <FormGroup className="m-t-15">
                       <Label htmlFor="file">Upload Payment receipt</Label>
@@ -292,8 +308,12 @@ const ProductId = () => {
                         }}
                         type="file"
                         id="file"
+                        required
                       />
                     </FormGroup>
+              <Button color="primary" >
+                Submit
+              </Button>
                   </Form>
                 </Card>
               ) : (
@@ -301,9 +321,6 @@ const ProductId = () => {
                   Online payment gateway coming soon...
                 </Alert>
               )}
-              <Button color="primary" onClick={checkout}>
-                Procced
-              </Button>
             </div>
           </Col>
         </Row>

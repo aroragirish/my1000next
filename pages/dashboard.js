@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Card, FormGroup, Button } from "reactstrap";
 import Image from "next/image";
-import img4 from "../assets/images/portfolio/laptop.png";
+import img4 from "../assets/images/portfolio/call-center.gif";
 
-import img5 from "../assets/images/portfolio/kyc.png";
+import img5 from "../assets/images/portfolio/file-searching.gif";
 import { getAllBusinesses } from "../services/businessService";
 import Link from "next/link";
 import { truncate } from "../utils";
@@ -190,6 +190,8 @@ const dashboard = () => {
                   className="card-img-top"
                   src={img4}
                   alt="wrappixel kit"
+                  height={200}
+                  width={200}
                 />
               </div>
               <h2 className="card-text">Schedule a call</h2>
@@ -215,6 +217,8 @@ const dashboard = () => {
                   className="card-img-top"
                   src={img5}
                   alt="wrappixel kit"
+                  height={200}
+                  width={200}
                 />
               </div>
               <h2 className="card-text">Share KYC Details</h2>

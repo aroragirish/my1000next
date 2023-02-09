@@ -13,7 +13,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import { getMyorders, addOrder } from "../services/orderService";
+import { getMyorders, cancelOrderById } from "../services/orderService";
 
 const YourOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -29,6 +29,13 @@ const YourOrders = () => {
       router.push('/error');
   })
   }, []);
+  const cancelOrder = (id) => {
+    cancelOrderById(id).then((res) => {
+      router.push('/my-orders');
+    }).catch(() => {
+      router.push('/error');
+  })
+  }
   return (
     <div
       style={{
@@ -45,7 +52,7 @@ const YourOrders = () => {
           }}
           className="text-center"
         >
-          You don't have any Order added
+          You don't have any Orders
         </h1>
       ) : (
         <Table
@@ -65,25 +72,22 @@ const YourOrders = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {orders.map((order, index) => {
               return (
                 <tr key={order.id}>
                   <th scope="row">{index + 1}</th>
-                  <td>{order?.business?.businessId}</td>
+                  <td>{order?.business?.title}</td>
                   <td>{order?.business?.category?.toUpperCase()}</td>
                   <td>{order?.business?.amountInvested}</td>
                   <td>{order?.business?.minInvestment}</td>
                   <td>{order.status}</td>
                   <td className="inline-flex">
-                    <Button color="primary" size="sm" className="m-1">
-                      Pay
-                    </Button>
                     {/* <Button className="text-info" color="link">
                       Edit
                     </Button> */}
-                    <Button color="danger" className="m-1" size="sm">
-                      Delete
+                    <Button onClick={() => cancelOrder(order._id)} color="danger" className="m-1" size="sm">
+                     <strong> Cancel Order</strong>
                     </Button>
                   </td>
                 </tr>

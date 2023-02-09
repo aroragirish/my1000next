@@ -241,7 +241,7 @@ const Products = () => {
                   <div className="text-center mt-5 w-100">
                     <button
                       onClick={loadmore}
-                      className="btn btn-outline-dark text-muted"
+                      className="btn btn-outline-info"
                     >
                       Load More
                     </button>
