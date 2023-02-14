@@ -6,7 +6,7 @@ import img5 from "../assets/images/portfolio/file-searching.gif";
 import Link from "next/link";
 
 
-const GetInvestment = () => {
+const Portfolio = () => {
     return (
         <>
             <div className="static-slider-head banner2 bg-dark text-center mt-5 pt-5">
@@ -51,4 +51,4 @@ const GetInvestment = () => {
     )
 }
 
-export default GetInvestment
+export default Portfolio
