@@ -88,6 +88,7 @@ const Header = () => {
                     </a>
                   </Link>
                 </NavItem>
+
                 <NavItem className="font-weight-bold">
                   <Link href="/about">
                     <a
@@ -101,6 +102,23 @@ const Header = () => {
                     </a>
                   </Link>
                 </NavItem>
+                
+                {user.role === 'investor' && (
+                  <NavItem className="font-weight-bold">
+                  <Link href="/portfolio">
+                    <a
+                      className={
+                        router.pathname == "/portfolio"
+                          ? "text-info nav-link"
+                          : "nav-link text-dark"
+                      }
+                    >
+                      Portfolio
+                    </a>
+                  </Link>
+                </NavItem>
+                )} 
+
               </Nav>
               {user ? (
                 <ButtonGroup>
@@ -141,7 +159,7 @@ const Header = () => {
                             </a>
                           </Link>
                         </DropdownItem>
-                      )}
+                      )}                      
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </ButtonGroup>
