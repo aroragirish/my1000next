@@ -33,7 +33,14 @@ const AddDocuments = () => {
 
         return formData;
     }
-
+    const saveUser = async (user) => {
+        dispatch({
+          type: 'SAVE_USER',
+          payload: {
+            user: user,
+          }
+        })
+      }
     const submit = (e) => {
         e.preventDefault();
         e.nativeEvent.stopImmediatePropagation();
@@ -44,7 +51,9 @@ const AddDocuments = () => {
         data.append('pan', pan);
         data.append('aadhar', aadhar);
         uploadKyc(data).then(async (res) => {
-            router.push('/dashboard');
+            const response = await getUserByid(user.id);
+            await saveUser(response.data);
+            router.push('/dashboard')
         }).catch(() => {
             router.push('/error');
         });

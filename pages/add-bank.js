@@ -9,11 +9,11 @@ const AddBank = () => {
     const router = useRouter();
     const {user} = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const [bankName, setBankName] = useState(user.bankDetails.bankName);
-    const [branchName, setBranchName] = useState(user.bankDetails.branchName);
-    const [accountNumber, setAccountNumber] = useState(user.bankDetails.accountNumber);
-    const [ifsc, setIfsc] = useState(user.bankDetails.ifsc);
-    const [holderName, setHolderName] = useState(user.bankDetails.holderName);
+    const [bankName, setBankName] = useState(user?.bankDetails?.bankName);
+    const [branchName, setBranchName] = useState(user?.bankDetails?.branchName);
+    const [accountNumber, setAccountNumber] = useState(user?.bankDetails?.accountNumber);
+    const [ifsc, setIfsc] = useState(user?.bankDetails?.ifsc);
+    const [holderName, setHolderName] = useState(user?.bankDetails?.holderName);
     const [edit, enableEdit] = useState(false);
     const saveUser = async (user) => {
         dispatch({
