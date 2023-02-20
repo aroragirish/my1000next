@@ -58,7 +58,7 @@ const AddDocuments = () => {
             router.push('/error');
         });
     }
-    if (user.kycDetails) {
+    if (user?.kycDetails) {
         return (
             <div className='bg-light mt-5'>
                 <Container style={{
@@ -80,7 +80,7 @@ const AddDocuments = () => {
                         <div className='d-flex justify-content-around'>
                             <div style={{
                                 cursor: 'pointer'
-                            }} onClick={() => window.open(user.kycDetails.aadhar, "_blank")}>
+                            }} onClick={() => window.open(user?.kycDetails?.aadhar, "_blank")}>
                                 <Image className='d-block' height={100} width={100} src={googleDocs} />
 
                                 <br /><br />
@@ -91,7 +91,7 @@ const AddDocuments = () => {
                             </div >
                             <div style={{
                                 cursor: 'pointer'
-                            }} onClick={() => window.open(user.kycDetails.pan, "_blank")}>
+                            }} onClick={() => window.open(user?.kycDetails?.pan, "_blank")}>
                                 <Image className='d-block' height={100} width={100} src={googleDocs} />
 
                                 <br /><br />

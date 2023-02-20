@@ -212,7 +212,7 @@ const dashboard = () => {
             </div>
           </div>
           {
-            !user.kycDone && (
+            (user?.role === 'investor' && !user?.kycDone) && (
               <div className="col-md-12">
             <div className="card-shadow card card-body">
               <div className="card-title">

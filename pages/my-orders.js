@@ -27,14 +27,14 @@ const YourOrders = () => {
       setOrders(res.data);
     }).catch(() => {
       router.push('/error');
-  })
+    })
   }, []);
   const cancelOrder = (id) => {
     cancelOrderById(id).then((res) => {
       router.push('/my-orders');
     }).catch(() => {
       router.push('/error');
-  })
+    })
   }
   return (
     <div
@@ -86,9 +86,16 @@ const YourOrders = () => {
                     {/* <Button className="text-info" color="link">
                       Edit
                     </Button> */}
-                    <Button onClick={() => cancelOrder(order._id)} color="danger" className="m-1" size="sm">
-                     <strong> Cancel Order</strong>
-                    </Button>
+                    {
+                      order.status !== 'Pending' ? (
+                        null
+                      ) : (
+
+                        <Button onClick={() => cancelOrder(order._id)} color="danger" className="m-1" size="sm">
+                          <strong> Cancel Order</strong>
+                        </Button>
+                      )
+                    }
                   </td>
                 </tr>
               );
