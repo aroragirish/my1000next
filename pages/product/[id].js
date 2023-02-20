@@ -305,13 +305,24 @@ const ProductId = () => {
               </Row>
             </Card>
             {user?.role === "investor" && (
-              <Button
+              user.kycDone ? (
+                <Button
                 className="w-100"
                 color="primary"
                 onClick={checkoutProduct}
               >
                 Invest Now
               </Button>
+              ) : (
+                <>
+                <Button disabled className="w-100" color="secondary">
+                  Invest Now
+                </Button>
+                <p className="m-t-5 text-danger">
+                  You need to complete your KYC to start investing
+                </p>
+              </>
+              )
             )}
             {user?.role === "business" && (
               <>

@@ -80,7 +80,6 @@ const AddBusiness = () => {
     }
 
     const submit = (e) => {
-        console.log(documents);
         e.preventDefault();
         e.nativeEvent.stopImmediatePropagation();
         const body = {

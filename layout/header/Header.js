@@ -103,7 +103,7 @@ const Header = () => {
                   </Link>
                 </NavItem>
                 
-                {user.role === 'investor' && (
+                {user?.role === 'investor' && (
                   <NavItem className="font-weight-bold">
                   <Link href="/portfolio">
                     <a
@@ -138,9 +138,6 @@ const Header = () => {
                           </Link>
                         </DropdownItem>
                       )}
-                      <DropdownItem tag="a" onClick={logout}>
-                        Logout
-                      </DropdownItem>
 
                       {user?.role !== "investor" && (
                         <DropdownItem>
@@ -159,7 +156,20 @@ const Header = () => {
                             </a>
                           </Link>
                         </DropdownItem>
-                      )}                      
+                      )}
+                      {user?.role === "investor" && (
+                        <DropdownItem>
+                          <Link href="/add-bank" passHref>
+                            <a className="text-black">
+                              Update Bank Details
+                            </a>
+                          </Link>
+                        </DropdownItem>
+                      )}    
+                      
+                      <DropdownItem tag="a" onClick={logout}>
+                      <span className="text-danger"> Logout </span>
+                      </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </ButtonGroup>

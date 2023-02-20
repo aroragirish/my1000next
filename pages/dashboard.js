@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Card, FormGroup, Button } from "reactstrap";
 import Image from "next/image";
 import img4 from "../assets/images/portfolio/call-center.gif";
-
+import { useSelector, useDispatch } from "react-redux";
+import Link from 'next/link';
 import img5 from "../assets/images/portfolio/file-searching.gif";
 import { getAllBusinesses } from "../services/businessService";
-import Link from "next/link";
 import { truncate } from "../utils";
 
 const dashboard = () => {
   const [businesses, setBusinesses] = useState([]);
+  const {user} = useSelector(state => state.user);
 
   useEffect(() => {
     getAllBusinesses().then((res) => {
@@ -210,7 +211,9 @@ const dashboard = () => {
               </a>
             </div>
           </div>
-          <div className="col-md-12">
+          {
+            !user.kycDone && (
+              <div className="col-md-12">
             <div className="card-shadow card card-body">
               <div className="card-title">
                 <Image
@@ -223,17 +226,23 @@ const dashboard = () => {
               </div>
               <h2 className="card-text">Share KYC Details</h2>
               <p className="text-muted">It won't take more than 2 minutes</p>
-              <a
+              <Link
                 style={{
-                  fontSize: "24px",
                   cursor: "pointer",
                 }}
                 className="text-primary"
+                href="/add-documents"
               >
-                COMPLETE KYC
-              </a>
+               <span style={{
+                fontSize: '24px',
+                cursor: 'pointer',
+                color: 'blue'
+               }}> Complete KYC</span>
+              </Link>
             </div>
           </div>
+            )
+          }
         </div>
       </div>
     </div>
