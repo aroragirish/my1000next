@@ -17,7 +17,7 @@ import { getMyorders, cancelOrderById } from "../services/orderService";
 
 const YourOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [selectedBusinessId, setSelectedBusinessId] = useState();
+  const [selectedOrderId, setSelectedOrderId] = useState();
 
   const [modal, setModal] = useState(false);
 
@@ -31,7 +31,12 @@ const YourOrders = () => {
   }, []);
   const cancelOrder = (id) => {
     cancelOrderById(id).then((res) => {
-      router.push('/my-orders');
+      getMyorders().then((res) => {
+        setOrders(res.data);
+        router.push('/my-orders');
+      }).catch(() => {
+        router.push('/error');
+      })
     }).catch(() => {
       router.push('/error');
     })
@@ -42,6 +47,7 @@ const YourOrders = () => {
         minHeight: "350px",
         margin: "15%",
         marginBottom: "100px",
+        overflowX: 'scroll'
       }}
       className="mt-5 pt-5"
     >
@@ -55,76 +61,87 @@ const YourOrders = () => {
           You don't have any Orders
         </h1>
       ) : (
-        <Table
+        <><h1
+          style={{
+            marginTop: "50px",
+          }}
+          className="text-center"
+        >
+          Your Orders
+        </h1><p className="text-center mt-5">
+            <strong>
+              *Orders placed with offline payment mode may take couple of days to complete
+            </strong>
+          </p><Table
           bordered
           style={{
-            marginTop: "100px",
+            marginTop: "50px",
           }}
         >
-          <thead className="text-center">
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Amount Invested</th>
-              <th>Min Investment</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {orders.map((order, index) => {
-              return (
-                <tr key={order.id}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{order?.business?.title}</td>
-                  <td>{order?.business?.category?.toUpperCase()}</td>
-                  <td>{order?.business?.amountInvested}</td>
-                  <td>{order?.business?.minInvestment}</td>
-                  <td>{order.status}</td>
-                  <td className="inline-flex">
-                    {/* <Button className="text-info" color="link">
-                      Edit
-                    </Button> */}
-                    {
-                      order.status !== 'Pending' ? (
+            <thead className="text-center">
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Amount Invested</th>
+                <th>Min Investment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {orders.map((order, index) => {
+                return (
+                  <tr key={order.id}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{order?.business?.title}</td>
+                    <td>{order?.business?.category?.toUpperCase()}</td>
+                    <td>{order?.business?.amountInvested}</td>
+                    <td>{order?.business?.minInvestment}</td>
+                    <td>{order.status}</td>
+                    <td className="inline-flex">
+                      {/* <Button className="text-info" color="link">
+                  Edit
+                </Button> */}
+                      {order.status !== 'Pending' ? (
                         null
                       ) : (
 
-                        <Button onClick={() => cancelOrder(order._id)} color="danger" className="m-1" size="sm">
+                        <Button onClick={() => {
+                          setSelectedOrderId(order._id);
+                          toggle();
+                        }} color="danger" className="m-1" size="sm">
                           <strong> Cancel Order</strong>
                         </Button>
-                      )
-                    }
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </>
       )}
-      {/* <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Delete Business</ModalHeader>
-        <ModalBody>Are you sure? You want to delete this business?</ModalBody>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Cancel Order</ModalHeader>
+        <ModalBody>Are you sure? You want to cancel this order?</ModalBody>
         <ModalFooter>
           <Button
             onClick={() => {
-              deleteBusiness(selectedBusinessId).then((res) => {
-                getBusinessesByUser().then((res) => {
-                  setBusinesses(res.data);
-                  toggle();
-                });
-              });
+              cancelOrder(selectedOrderId);
             }}
             color="danger"
           >
-            Delete
+            Cancel
           </Button>{" "}
-          <Button outline color="secondary" onClick={toggle}>
+          <Button outline color="secondary" onClick={() => {
+            setSelectedOrderId();
+            toggle();
+          }}>
             Cancel
           </Button>
         </ModalFooter>
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

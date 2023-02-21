@@ -23,6 +23,8 @@ const Products = () => {
   const [businesses, setBusinesses] = useState([]);
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0);
+  const [moreDisabled, setMoreDisabled] = useState(false);
+
   const [category, setCategory] = useState("all");
 
   useEffect(
@@ -38,6 +40,7 @@ const Products = () => {
     getAllBusinessesByCategory(category, 0, 6).then((res) => {
       setPage(1);
       setBusinesses(res.data);
+      setMoreDisabled(false);
     }).catch(() => {
       router.push('/error');
   });
@@ -45,6 +48,10 @@ const Products = () => {
 
   const loadmore = () => {
     getAllBusinessesByCategory(category, page, 6).then((res) => {
+      
+      if (res.data.length === 0) {
+        setMoreDisabled(true);
+      }
       setPage((page) => page + 1);
       setBusinesses([...businesses, ...res.data]);
     }).catch(() => {
@@ -111,7 +118,7 @@ const Products = () => {
                       <Col key={business._id} className="m-t-40" lg="4" md="6">
                         <Card
                           style={{
-                            padding: "10px",
+                            padding: "15px",
                             boxShadow: "2px 2px 2px 2px lightgrey",
                             borderRadius: "20px",
                           }}
@@ -156,11 +163,7 @@ const Products = () => {
                                   fontSize: "14px",
                                 }}>
                                 <strong>
-                                  {" "}
-                                  ₹{" "}
-                                  {business.targetToRaise
-                                    ? business.targetToRaise
-                                    : 0}{" "}
+                                  {`${business.tenure} ${business.tenureUnit.charAt(0).toUpperCase() + business.tenureUnit.slice(1)}`}
                                 </strong>
                               </div>
                               <div
@@ -169,7 +172,7 @@ const Products = () => {
                                   fontSize: "14px",
                                 }}
                               >
-                                Target to raise
+                                Tenure
                               </div>
                             </Col>
                             <Col lg={4}>
@@ -207,7 +210,7 @@ const Products = () => {
                                   fontSize: "14px",
                                 }}
                               >
-                                Minimum investment
+                                Min Investment
                               </div>
                             </Col>
                           </Row>
@@ -216,7 +219,7 @@ const Products = () => {
                             className="linking text-themecolor m-t-5"
                             passHref
                           >
-                            <a>
+                            <a className="mt-3">
                               Learn More <i className="ti-arrow-right"></i>
                             </a>
                           </Link>
@@ -237,7 +240,7 @@ const Products = () => {
                   </Container>
                 )}
 
-                {businesses.length !== 0 && (
+                {(businesses.length !== 0  && !moreDisabled)&& (
                   <div className="text-center mt-5 w-100">
                     <button
                       onClick={loadmore}

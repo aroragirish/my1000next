@@ -31,7 +31,7 @@ import { truncate } from "../../utils";
 
 const ProductId = () => {
   const [business, setBusiness] = useState();
-  const { user } = useSelector((state) => state.user);
+  const { user = {} } = useSelector((state) => state.user);
   const [deleteModal, setDeleteModal] = useState(false);
   const [approveModal, setApproveModal] = useState(false);
   const [selectedBusinessId, setSelectedBusinessId] = useState();
@@ -71,7 +71,7 @@ const ProductId = () => {
         className="mt-5 pt-5"
       >
         <Row>
-          <Col lg={9}>
+          <Col lg={8}>
             <div className="">
               <ToastHeader className="text-bold text-dark">
                 <h1>{business.title}</h1>
@@ -220,7 +220,7 @@ const ProductId = () => {
               </Accordion>
             </div>
           </Col>
-          <Col lg={3}>
+          <Col lg={4}>
             {user?.role === "admin" && !business.approved && (
               <div>
                 <Button
@@ -253,11 +253,11 @@ const ProductId = () => {
                 boxShadow: "2px 2px 2px 2px lightgrey",
               }}
             >
-              <h3 className="font-medium m-t-20">
+              <h5 className="font-medium m-t-20">
                 <a className="link">
                   {business.title ? business.title?.toUpperCase() : ""}
                 </a>
-              </h3>
+              </h5>
               <hr />
               <Row>
                 <Col lg={12}>
@@ -299,6 +299,22 @@ const ProductId = () => {
                       {business.totalSubscribers
                         ? business.totalSubscribers
                         : 0}{" "}
+                    </strong>
+                  </div>
+                </Col>
+                <Col lg={12}>
+                  <div>
+                    <h5 className="font-medium m-t-20">Payout</h5>
+                    <strong>
+                      {" "}{business.payout.charAt(0).toUpperCase() + business.payout.slice(1)}{" "}
+                    </strong>
+                  </div>
+                </Col>
+                <Col lg={12}>
+                  <div>
+                    <h5 className="font-medium m-t-20">Tenure</h5>
+                    <strong>
+                    {`${business.tenure} ${business.tenureUnit.charAt(0).toUpperCase() + business.tenureUnit.slice(1)}`}
                     </strong>
                   </div>
                 </Col>

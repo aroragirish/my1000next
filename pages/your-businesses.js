@@ -38,6 +38,7 @@ const YourBusinesses = () => {
         minHeight: "350px",
         margin: "15%",
         marginBottom: "100px",
+        overflowX: "scroll"
       }}
       className="mt-5 pt-5"
     >
@@ -74,7 +75,9 @@ const YourBusinesses = () => {
                   <th scope="row">{index + 1}</th>
                   <td>{business.title}</td>
                   <td>{business.category.toUpperCase()}</td>
-                  <td>{business.description}</td>
+                  <td style={{
+                    maxWidth: '350px'
+                  }}>{business.description}</td>
                   <td>{business.approved ? "Approved" : "Pending Approval"}</td>
                   <td className="inline-flex">
                     <Button

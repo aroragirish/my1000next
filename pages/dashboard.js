@@ -7,11 +7,12 @@ import Link from 'next/link';
 import img5 from "../assets/images/portfolio/file-searching.gif";
 import { getAllBusinesses } from "../services/businessService";
 import { truncate } from "../utils";
+import { useRouter } from "next/router";
 
 const dashboard = () => {
   const [businesses, setBusinesses] = useState([]);
-  const {user} = useSelector(state => state.user);
-
+  const {user = {}} = useSelector(state => state.user);
+  const router = useRouter();
   useEffect(() => {
     getAllBusinesses().then((res) => {
       setBusinesses(res.data);
@@ -42,9 +43,10 @@ const dashboard = () => {
                   <Link
                     href="/product"
                     class="text-primary"
-                    style="font-size: 24px; cursor: pointer;"
                   >
-                    VIEW ALL
+                  <strong class="text-primary" style={{
+                    cursor: 'pointer'
+                  }}>  VIEW ALL <i className="ti-arrow-right"></i></strong>
                   </Link>
                 </FormGroup>
               </Col>
@@ -104,27 +106,23 @@ const dashboard = () => {
                             </p>
                             <hr />
                             <Row>
-                              <Col lg={4}>
-                                <div style={{
+                            <Col lg={4}>
+                              <div style={{
                                   fontSize: "14px",
                                 }}>
-                                  <strong>
-                                    {" "}
-                                    ₹{" "}
-                                    {business.targetToRaise
-                                      ? business.targetToRaise
-                                      : 0}{" "}
-                                  </strong>
-                                </div>
-                                <div
-                                  className="text-muted"
-                                  style={{
-                                    fontSize: "14px",
-                                  }}
-                                >
-                                  Target to raise
-                                </div>
-                              </Col>
+                                <strong>
+                                  {`${business.tenure} ${business.tenureUnit.charAt(0).toUpperCase() + business.tenureUnit.slice(1)}`}
+                                </strong>
+                              </div>
+                              <div
+                                className="text-muted"
+                                style={{
+                                  fontSize: "14px",
+                                }}
+                              >
+                                Tenure
+                              </div>
+                            </Col>
                               <Col lg={4}>
                                 <div style={{
                                   fontSize: "14px",
@@ -195,10 +193,12 @@ const dashboard = () => {
                   width={200}
                 />
               </div>
-              <h2 className="card-text">Schedule a call</h2>
+              <h2 className="card-text">
+                {user?.role === 'investor' ? 'Investing for the first time?' : 'Adding business for the first time?'}
+              </h2>
               <p className="text-muted">
-                With your Relationship Manager to know more details about the
-                opportunity and clear your doubts
+                Call us to get in touch with our Relationship Manager to know more details about the
+                opportunities and clear your doubts
               </p>
               <a
                 style={{

@@ -55,9 +55,11 @@ const Header = () => {
             <Collapse
               isOpen={isOpen}
               navbar
-              className="hover-dropdown ml-auto  justify-content-end"
+              className="hover-dropdown ml-auto  justify-content-between"
               id="h6-info"
             >
+              
+            <div></div>
               <Nav navbar className="ml-auto">
                 {user && (
                   <NavItem className="font-weight-bold">
@@ -69,7 +71,10 @@ const Header = () => {
                             : "nav-link text-dark"
                         }
                       >
+                        <strong>
                         Dashboard
+                        </strong>
+                        
                       </a>
                     </Link>
                   </NavItem>
@@ -84,7 +89,10 @@ const Header = () => {
                           : "nav-link text-dark"
                       }
                     >
+                      <strong>
                       Businesses
+                      </strong>
+                      
                     </a>
                   </Link>
                 </NavItem>
@@ -98,7 +106,8 @@ const Header = () => {
                           : "nav-link text-dark"
                       }
                     >
-                      About Us
+                      
+                      <strong>About Us</strong>
                     </a>
                   </Link>
                 </NavItem>
@@ -109,11 +118,11 @@ const Header = () => {
                     <a
                       className={
                         router.pathname == "/portfolio"
-                          ? "text-info nav-link"
+                          ? "text-info nav-link "
                           : "nav-link text-dark"
                       }
                     >
-                      Portfolio
+                      <strong>Portfolio</strong>
                     </a>
                   </Link>
                 </NavItem>

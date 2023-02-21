@@ -28,6 +28,7 @@ const AddBusiness = () => {
 
     const [tradeName, setTradeName] = useState('');
     const [file, setFile] = useState();
+    const [tenure, setTenure] = useState();
     const [title, setTitle] = useState('');
     const [description, setDesc] = useState('');
     const [tags, setTags] = useState([]);
@@ -43,6 +44,8 @@ const AddBusiness = () => {
     const [categories, setCategories] = useState([]);
     const [firmType, setFirmType] = useState('Private Limited / Limited');
     const [employees, setEmployees] = useState();
+    const [tenureUnit, setTenureUnit] = useState('years');
+    const [payout, setPayout] = useState('yearly');
 
     const [extraInfo, setValue] = useState('');
 
@@ -92,6 +95,9 @@ const AddBusiness = () => {
             minInvestment: minSubscription,
             extraInfo,
             image: file,
+            tenure,
+            tenureUnit,
+            payout,
             aboutCompany: {
                 tradeName,
                 incorporationDate: incDate,
@@ -137,13 +143,21 @@ const AddBusiness = () => {
                                         <Row>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="title">Title</Label>
+                                                    <Label htmlFor="title">
+                                                        <strong>
+                                                        Title
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={title} onChange={(e) => { setTitle(e.target.value) }} type="text" className="form-control" id="title" placeholder="Enter title" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label for="category">Category</Label>
+                                                    <Label for="category">
+                                                        <strong>
+                                                        Category
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={category} onChange={(e) => setCategory(e.target.value)} style={{
                                                     }} className='form-control' type='select' name="category" id="category">
                                                         <option>Please select category</option>
@@ -155,12 +169,20 @@ const AddBusiness = () => {
                                             </Col>
                                             <Col lg="12">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="description">Description</Label>
+                                                    <Label htmlFor="description">
+                                                        <strong>
+                                                        Description
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={description} placeholder="maximum 300 characters" maxLength={300} onChange={(e) => { setDesc(e.target.value) }} type="textarea" className="form-control" id="description" required />
                                                 </FormGroup>
                                             </Col><Col lg="12">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="tags">Tags</Label>
+                                                    <Label htmlFor="tags">
+                                                        <strong>
+                                                        Tags
+                                                        </strong>
+                                                    </Label>
                                                     <Input
                                                         onKeyDown={handleKeyDown} placeholder="maximum 10 characters" maxLength={10}
                                                         type="text" className="form-control" id="tags" />
@@ -196,31 +218,82 @@ const AddBusiness = () => {
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="target">Target To Raise</Label>
+                                                    <Label htmlFor="target">
+                                                        <strong>
+                                                        Target To Raise
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={targetToRaise} onChange={(e) => { setTargetToRaise(e.target.value) }} type="number" className="form-control" id="target" placeholder="₹" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="target">Minimum investment</Label>
+                                                    <Label htmlFor="target">
+                                                        <strong>
+                                                        Minimum investment
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={minSubscription} onChange={(e) => { setMinSubscription(e.target.value) }} type="number" className="form-control" id="target" placeholder="₹" required />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="3">
+                                                <FormGroup className="m-t-15">
+                                                    <Label htmlFor="tenure"><strong>Tenure</strong></Label>
+                                                    <Input value={tenure} onChange={(e) => { setTenure(e.target.value) }} type="number" className="form-control" id="tenure" required />
+
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="3">
+                                                    <FormGroup className="m-t-10">
+                                                    <Label htmlFor="tenure">{" "}</Label>
+                                                        <Input  value={tenureUnit} onChange={(e) => setTenureUnit(e.target.value)} style={{
+                                                            }} className='form-control m-t-15' type='select' name="firmType" id="firmType">
+                                                                <option value="years">Years</option>;
+                                                                <option value="months">Months</option>;
+                                                        </Input >
+                                                    </FormGroup>
+                                            </Col>
+                                            <Col lg="6">
+                                                <FormGroup className="m-t-15">
+                                                    <Label htmlFor="target">
+                                                        <strong>
+                                                        Payout
+                                                        </strong>
+                                                    </Label>
+                                                    <Input  value={payout} onChange={(e) => setPayout(e.target.value)} style={{
+                                                            }} className='form-control' type='select' name="firmType" id="firmType">
+                                                                <option value="yearly">Yearly</option>;
+                                                                <option value="monthly">Monthly</option>;
+                                                        </Input >
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="tradeName">Trade Name of your Business</Label>
+                                                    <Label htmlFor="tradeName">
+                                                        <strong>
+                                                        Trade Name of your Business
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={tradeName} onChange={(e) => { setTradeName(e.target.value) }} type="text" className="form-control" id="tradeName" placeholder="Enter trade name" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="incDate">Incorporation Date</Label>
+                                                    <Label htmlFor="incDate">
+                                                        <strong>
+                                                        Incorporation Date
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={incDate} onChange={(e) => { setIncDate(e.target.value) }} type="date" className="form-control" id="incDate" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label for="firmType">Entity type</Label>
+                                                    <Label for="firmType">
+                                                        <strong>
+                                                        Entity type
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={firmType} onChange={(e) => setFirmType(e.target.value)} style={{
                                                     }} className='form-control' type='select' name="firmType" id="firmType">
                                                         <option value="Private Limited / Limited">Private Limited / Limited</option>;
@@ -232,26 +305,42 @@ const AddBusiness = () => {
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="employees">Number of Employees</Label>
+                                                    <Label htmlFor="employees">
+                                                        <strong>
+                                                        Number of Employees
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={employees} onChange={(e) => { setEmployees(e.target.value) }} type="number" className="form-control" id="employees" placeholder="" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="address">Location</Label>
+                                                    <Label htmlFor="address">
+                                                        <strong>
+                                                        Location
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={address} onChange={(e) => { setAddress(e.target.value) }} type="string" className="form-control" id="address" placeholder="Enter complete address" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="website">Website</Label>
+                                                    <Label htmlFor="website">
+                                                        <strong>
+                                                        Website
+                                                        </strong>
+                                                    </Label>
                                                     <Input value={website} onChange={(e) => { setWebsite(e.target.value) }} type="string" className="form-control" id="website" placeholder="yourbusiness.com" required />
                                                 </FormGroup>
                                             </Col>
 
                                             <Col lg="6">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="file">Upload image for your Business</Label>
+                                                    <Label htmlFor="file">
+                                                        <strong>
+                                                        Upload image for your Business
+                                                        </strong>
+                                                    </Label>
                                                     <Input name='image' onChange={(e) => {
                                                         setFile(e.target.files[0])
                                                     }} type="file" id="file" required />
@@ -259,8 +348,10 @@ const AddBusiness = () => {
                                             </Col>
                                             <Col lg="6">
                                                 <FormGroup className="">
-                                                    <Label htmlFor="documents">Upload all required documents
-
+                                                    <Label htmlFor="documents">
+                                                        <strong>
+                                                        Upload all required documents
+                                                        </strong>
                                                     </Label>
 
                                                     <div
@@ -297,7 +388,11 @@ const AddBusiness = () => {
                                             </Col>
                                             <Col lg="12">
                                                 <FormGroup className="m-t-15">
-                                                    <Label htmlFor="extraInfo">Give us some extra information about your business</Label>
+                                                    <Label htmlFor="extraInfo">
+                                                        <strong>
+                                                        Give us some extra information about your business
+                                                        </strong>
+                                                    </Label>
 
                                                     <MyEditor placeholder='Enter extra info about your business here like highlights, email, phone, address. Use all options to add more good looking content' value={extraInfo} onChange={setValue} id="rte" />
                                                 </FormGroup>
@@ -313,7 +408,7 @@ const AddBusiness = () => {
                                                         fontSize: '20px',
                                                         marginLeft: '10px'
                                                     }} check>
-                                                        I understand all <a href='#'>Terms and conditions</a>
+                                                      <strong> I understand all <a href='#'>Terms and conditions</a></strong> 
                                                     </Label>
                                                 </FormGroup>
                                             </Col>
