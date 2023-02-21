@@ -35,6 +35,8 @@ const ProductId = () => {
   useEffect(() => {
     if (business) {
         setInvestment(business.minInvestment);
+    } else {
+      router.push('/product');
     }
     return () => {
         dispatch({
