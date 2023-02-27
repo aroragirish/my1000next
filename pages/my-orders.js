@@ -13,11 +13,14 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import OrderDetailsModal from "../components/custom/OrderDetailsModal";
 import { getMyorders, cancelOrderById } from "../services/orderService";
 
 const YourOrders = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState();
+  const [openDetails, setOpenDetails] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState();
 
   const [modal, setModal] = useState(false);
 
@@ -94,7 +97,14 @@ const YourOrders = () => {
                 return (
                   <tr key={order.id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{order?.business?.title}</td>
+                    <td>
+                      <a onClick={() => {
+                          setSelectedOrder(order);
+                          setOpenDetails(true);
+                          }} href="#">
+                          {order?.business?.title}
+                      </a>
+                    </td>
                     <td>{order?.business?.category?.toUpperCase()}</td>
                     <td>{order?.business?.amountInvested}</td>
                     <td>{order?.business?.minInvestment}</td>
@@ -142,6 +152,7 @@ const YourOrders = () => {
           </Button>
         </ModalFooter>
       </Modal>
+      {openDetails && <OrderDetailsModal open={true} order={selectedOrder} close={setOpenDetails} />}
     </div>
   );
 };

@@ -141,39 +141,51 @@ const Header = () => {
                     </DropdownToggle>
                     <DropdownMenu>
                       {user?.role === "investor" && (
-                        <DropdownItem>
                           <Link href="/my-orders" passHref>
+                          <DropdownItem>
                             <a className="text-black"> My Orders</a>
-                          </Link>
                         </DropdownItem>
+                          </Link>
                       )}
 
-                      {user?.role !== "investor" && (
-                        <DropdownItem>
+                      {user?.role === "business" && (
                           <Link href="/add-business" passHref>
+                          <DropdownItem>
                             <a className="text-black"> Add Business</a>
-                          </Link>
                         </DropdownItem>
+                          </Link>
                       )}
                       {user?.role !== "investor" && (
-                        <DropdownItem>
                           <Link href="/your-businesses" passHref>
+                            
+                        <DropdownItem>
                             <a className="text-black">
                               {user?.role === "admin"
                                 ? "All Businesses"
                                 : "Your Businesses"}
                             </a>
+                            </DropdownItem>
                           </Link>
+                      )}
+                      {user?.role === "admin" && (
+                          <Link href="/all-orders" passHref>
+                            
+                        <DropdownItem>
+                            <a className="text-black">
+                              All Orders
+                            </a>
+                            
                         </DropdownItem>
+                          </Link>
                       )}
                       {user?.role === "investor" && (
-                        <DropdownItem>
                           <Link href="/add-bank" passHref>
+                          <DropdownItem>
                             <a className="text-black">
                               Update Bank Details
                             </a>
-                          </Link>
                         </DropdownItem>
+                          </Link>
                       )}    
                       
                       <DropdownItem tag="a" onClick={logout}>

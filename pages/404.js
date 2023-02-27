@@ -1,35 +1,33 @@
-import Head from "next/head";
-import Link from "next/link";
-import { Container, Row, Col, Button } from "reactstrap";
+import React from "react";
+import { Container, Row, Col, Card, CardBody } from "reactstrap";
+import error from '../assets/images/page-not-found.svg';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const ErrorPage = () => {
   return (
-    <div className="static-slider-head">
-      <Head>
-        <title>404 - Page not Found</title>
-        <meta
-          name="description"
-          content="The page you are looking for is not found go back to the homepage"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Container>
-        <Row className="justify-content-center">
-          <Col lg="8" md="6" className="align-self-center text-center">
-            <h1 className="title">404 - Error</h1>
-            <h4 className="subtitle font-light">
-              The page you are looking for is not available
-              <br /> please go back to homepage
-            </h4>
-            <Link href="/">
-              <Button className="btn btn-md m-t-30 btn-info-gradiant font-14">
-                Back to Homepage
-              </Button>
-            </Link>
-          </Col>
+    <div className="static-slider-head banner2 bg-light mt-5 pt-5">
+    <Container>
+        <Row className=" d-flex align-items-center  justify-content-center p-5">
+            <Col lg="12" md="12" className="align-self-center">
+                <h1 className="title text-dark text-center">
+                  Oops! We are not able to find what you are looking for.
+                </h1>
+
+            </Col>
+            <Col lg={12}>
+                <h4 className="subtitle text-dark text-center">
+                    Try to browse our listed businesses to find investment opportunities <Link href='/product'>
+                      Take me to businesses
+                    </Link>
+                </h4>
+            </Col>
+            <Col lg={6}>
+                <Image src={error} layout="responsive" />
+            </Col>
         </Row>
-      </Container>
-    </div>
+    </Container>
+</div>
   );
 };
 
